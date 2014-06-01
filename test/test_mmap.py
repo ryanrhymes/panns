@@ -10,7 +10,7 @@ import sys
 import time
 import cPickle as pickle
 
-sys.path.append('../../')
+sys.path.append('../')
 from panns import *
 
 import numpy

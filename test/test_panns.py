@@ -13,7 +13,7 @@ import os
 import sys
 import time
 
-sys.path.append('../../')
+sys.path.append('../')
 from panns import *
 from annoy import *
 
