@@ -1,7 +1,7 @@
 panns -- Nearest Neighbor Search
 ====
 
-panns stands for "Python Approximate Nearest Neighbor Search", which is an optimized python library for searching [approximate k-nearest neighbors](http://en.wikipedia.org/wiki/Nearest_neighbor_search#Approximate_nearest_neighbor) in very high dimensional spaces. E.g. one tyical use in semantic web is finding the most relevant documents in a big text corpus. Currently, panns supports two distance metrics: Euclidean and Cosine.
+panns stands for "Python Approximate Nearest Neighbor Search", which is an optimized python library for searching [approximate k-nearest neighbors](http://en.wikipedia.org/wiki/Nearest_neighbor_search#Approximate_nearest_neighbor) in very high dimensional spaces. E.g. one tyical use in semantic web is finding the most relevant documents in a big text corpus. Currently, panns supports two distance metrics: Euclidean and cosine.
 
 Technically, panns is only a small function module in one of our ongoing projects. The reason we release it as a separate package is we realized it is actually very difficult to find an easy-to-use tool which can perform efficient k-NN search with satisfying accuracy in high dimensional space. High dimensionality in this context refers to those datasets having hundreds of features, which is already far beyond the capability of standard [k-d tree](http://en.wikipedia.org/wiki/K-d_tree).
 
@@ -22,7 +22,7 @@ panns is developed by [Liang Wang](http://cs.helsinki.fi/liang.wang) @ Helsinki 
 
 ## Installation
 
-Algebra operations in panns rely on both Numpy and Scipy, please make sure you have these two packages properly installed before using panns. The installation can be done by the following shell commands.
+Algebra operations in panns rely on both [Numpy](http://www.numpy.org/) and [Scipy](http://www.scipy.org/). Please make sure you have these two packages properly installed before using panns. The installation can be done by the following shell commands.
 
 ```bash
 sudo pip install numpy --upgrade
