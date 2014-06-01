@@ -12,6 +12,7 @@ Features:
 * Achieve higher accuracy.
 
 
+
 ## Installation
 
 Algebra operations in panns rely on both Numpy and Scipy, please make sure you have these two packages properly installed before using panns. The installation can be done by the following shell commands.
@@ -32,6 +33,7 @@ If you are interested in the source code or even want to contribute to make it f
 ```bash
 git clone git@github.com:ryanrhymes/panns.git
 ```
+
 
 
 ## Quick Start
@@ -91,6 +93,7 @@ p.build()
 ```
 
 
+
 ## Theory In a Nutshell
 
 Simply put, approximate k-NN in panns is achieved by [random projection](http://en.wikipedia.org/wiki/Locality-sensitive_hashing#Random_projection). The index is built by constructing a binary tree. Each node of the tree represents a scalar-projection of certain data points, which are further divided into two groups (left- and right-child) by comparing to their average. The accuracy can be improved from the following perspective:
@@ -100,16 +103,24 @@ Simply put, approximate k-NN in panns is achieved by [random projection](http://
 * using more projections (but longer building time and larger index).
 * using more binary trees (also longer building time and larger index).
 
-The accuracy of approximate k-NN is usually achieved at the price of large index. panns aims to find the good trade-off of these two conflicting factors. Different from other libraries, panns reuses the projection vectors among different trees instead of generating a new random vector for each node. This can significantly reduces the index size when the dimension is high and trees are many. At the same time, reusing the projection vectors will not degrade the accuracy.
+The accuracy of approximate k-NN is usually achieved at the price of large index. panns aims to find the good trade-off of these two conflicting factors. Different from other libraries, panns reuses the projection vectors among different trees instead of generating a new random vector for each node. This can significantly reduces the index size when the dimension is high and trees are many. At the same time, reusing the projection vectors will not degrade the accuracy (see Evaluation section below).
+
 
 
 ## Evaluation
 
-Evaluation in this section is simply done by comparing against Annoy. Annoy is a C++ implementation of similar functionality as panns, it is used in Spotify recommender system. Compared with Annoy, panns can achieve higher accuracy with much smaller index file. The reason is discussed in "Theory" section.
+Evaluation in this section is simply done by comparing against Annoy. Annoy is a C++ implementation of similar functionality as panns, it is used in Spotify recommender system. 
+
+Compared with Annoy, panns can achieve higher accuracy with much smaller index file. The reason was actually already briefly discussed in "Theory" section. Generally speaking, the higher accuracy is achieved by placing the offset at sample average; while the smaller index is achieved by reusing the projection vectors.
+
+One thing worth pointing out is the evaluation here is far from thorough and comprehensive, other evaluations are highly welcome.
+
 
 
 ## Discussion
 
 Any suggestions, questions and related discussions are welcome and can be found in [panns-group](https://groups.google.com/forum/#!forum/panns) .
+
+
 
 ## Future Work
