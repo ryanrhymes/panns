@@ -7,9 +7,10 @@ panns stands for "Python Approximate Nearest Neighbor Search", which is an optim
 Features:
 
 * Pure python implementation.
-* Small index file with high accuracy.
+* Optimized for large and high-dimension dataset (e.g. > 500).
+* Generate small index file with high query accuracy.
 * Support parallel building of indices.
-* Index can be shared among processes.
+* Small memory usage and index can be shared among processes.
 * Support raw, csv and [HDF5](http://www.hdfgroup.org/HDF5/) datasets.
 
 
@@ -55,7 +56,7 @@ p.build(50)
 p.save('test.idx')
 ```
 
-Besides using `add_vector(v)` function, panns supports multiple ways of loading a dataset. For those extremely large datasets, HDF5 is recommended though the building performance will be significantly degraded. However, the performance can be improved by enabling parallel building as shown later.
+Besides using `add_vector(v)` function, panns supports multiple ways of loading a dataset. For those extremely large datasets, [HDF5](http://www.hdfgroup.org/HDF5/) is recommended though the building performance will be significantly degraded. However, the performance can be improved by enabling parallel building as shown later.
 
 ```python
 # datasets can be loaded in the following ways
