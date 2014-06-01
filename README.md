@@ -96,6 +96,11 @@ Random projection
 
 
 
+## Evaluation
+
+Evaluation in this section is simply done by comparing against Annoy. Annoy is a C++ implementation of similar functionality as panns, it is used in Spotify recommender system. Compared with Annoy, panns can achieve higher accuracy with much smaller index file. The reason is discussed in "Theory" section.
+
+
 ## Discussion
 
 Any suggestions, questions and related discussions are welcome and can be found in [panns-group](https://groups.google.com/forum/#!forum/panns) .
