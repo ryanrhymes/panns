@@ -68,7 +68,7 @@ for i in xrange(1000):
     v = gaussian_vector(100)
     p.add_vector(v)
 
-# build the index and save to a file
+# build an index of 50 trees and save to a file
 p.build(50)
 p.save('test.idx')
 ```
