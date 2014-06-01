@@ -113,7 +113,7 @@ Evaluation in this section is simply done by comparing against Annoy. Annoy is a
 
 |            | panns (Euclidean) | Annoy (Euclidean) | panns (cosine) | Annoy (cosine) |
 |:----------:|:-----------------:|:-----------------:|:--------------:|:--------------:|
-|  Accuracy  |       69.2%       |       48.8%       |      70.1%     |                |
+|  Accuracy  |       69.2%       |       48.8%       |      70.1%     |      50.4%     |
 | Index Size |       5.4 MB      |       20 MB       |     5.4 MB     |      11 MB     |
 
 
