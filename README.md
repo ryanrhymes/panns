@@ -56,9 +56,9 @@ Besides using "add_vector(v)" function, panns supports multiple ways of loading 
 ```python
 
 p = PannsIndex('angular')
-p.load_matrix(A)            # list of row vectors or numpy matrix
-p.load_csv(fname, sep=',')  # csv file with specified separator
-p.load_hdf5()
+p.load_matrix(A)                     # a list of row vectors or a numpy matrix
+p.load_csv(fname, sep=',')           # a csv file with specified separator
+p.load_hdf5(fname, dataset='panns')  # a HDF5 file with specified dataset
 ```
 
 
