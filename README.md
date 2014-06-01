@@ -22,7 +22,7 @@ p.save('test.idx')
 ```
 
 
-The following code loads the index file, then perform a simple query.
+The following code loads the previously generated index file, then perform a simple query. The query returns 10 approximate nearest neighbors.
 
 ```python
 
@@ -34,6 +34,24 @@ p.load('test.idx')
 v = gaussian_vector(100)
 n = p.query(v, 10)
 ```
+
+
+Usually, building index for a high dimensional dataset can be very time-consuming. panns tries to speed up this process by optimizing the code and taking advantage of physical resources. If multiple cores are available, parallel building can be easily enabled as follows:
+
+```python
+
+from panns import *
+
+p = PannsIndex('euclidean')
+
+....
+
+p.parallelize(True)
+p.build(100)
+
+```
+
+
 
 ## Discussion
 
