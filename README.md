@@ -51,7 +51,7 @@ p.build(50)
 p.save('test.idx')
 ```
 
-Besides using "add_vector(v)" function, panns supports multiple ways of loading a dataset. For those extremely large datasets, HDF5 is recommended though the building performance will be significantly degraded.
+Besides using "add_vector(v)" function, panns supports multiple ways of loading a dataset. For those extremely large datasets, HDF5 is recommended though the building performance will be significantly degraded. However, the performance can be improved by enabling parallel building as shown later.
 
 ```python
 # datasets can be loaded in the following ways
@@ -60,8 +60,7 @@ p.load_csv(fname, sep=',')           # load a csv file with specified separator
 p.load_hdf5(fname, dataset='panns')  # load a HDF5 file with specified dataset
 ```
 
-
-The following code loads the previously generated index file, then perform a simple query. The query returns 10 approximate nearest neighbors.
+The saved index can be loaded and shared among different processes for future use. Therefore, the query performance can be further improved by parallelism. The following code loads the previously generated index file, then performs a simple query. The query returns 10 approximate nearest neighbors.
 
 ```python
 
@@ -75,7 +74,7 @@ n = p.query(v, 10)
 ```
 
 
-Usually, building index for a high dimensional dataset can be very time-consuming. panns tries to speed up this process by optimizing the code and taking advantage of physical resources. If multiple cores are available, parallel building can be easily enabled as follows:
+Usually, building index for a high dimensional dataset can be very time-consuming. panns tries to speed up this process from two perspectives: optimizing the code and taking advantage of the physical resources. If multiple cores are available, parallel building can be easily enabled as follows:
 
 ```python
 
@@ -86,7 +85,7 @@ p = PannsIndex('angular')
 ....
 
 p.parallelize(True)
-p.build(100)
+p.build()
 
 ```
 
