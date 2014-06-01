@@ -43,11 +43,12 @@ panns assumes that the dataset is a row-based the matrix (e.g. m x n), where eac
 from panns import *
 
 p = PannsIndex('euclidean')
+
 for i in xrange(1000):
     v = gaussian_vector(100)
     p.add_vector(v)
-p.build(50)
 
+p.build(50)
 p.save('test.idx')
 ```
 
