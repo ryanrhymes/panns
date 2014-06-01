@@ -36,7 +36,7 @@ git clone git@github.com:ryanrhymes/panns.git
 
 ## Quick Start
 
-panns assumes the dataset is a row-based the matrix (e.g. m x n), where each row represents a data point from an n-dimension space. The code snippet blow illustrate the basic usage.
+panns assumes that the dataset is a row-based the matrix (e.g. m x n), where each row represents a data point from an n-dimension feature space. The code snippet below first constructs a 1000 by 100 data matrix, then builds an index of 50 binary trees and saves it to a file.
 
 ```python
 
@@ -49,6 +49,16 @@ for i in xrange(1000):
 p.build(50)
 
 p.save('test.idx')
+```
+
+Besides using "add_vector(v)" function, panns supports multiple ways of loading a dataset. For extremely large dataset, HDF5 is recommended though the building performance will be significantly degraded.
+
+```python
+
+p = PannsIndex('angular')
+p.load_matrix()
+p.load_csv()
+p.load_hdf5()
 ```
 
 
