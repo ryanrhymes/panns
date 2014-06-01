@@ -93,7 +93,12 @@ p.build()
 
 ## Theory In a Nutshell
 
-Random projection
+Simply put, approximate k-NN in panns is achieved by [random projection](http://en.wikipedia.org/wiki/Locality-sensitive_hashing#Random_projection). The index is built by constructing a binary tree. Each node of the tree represents a scalar-projection of certain data points, which are further divided into two groups (left- and right-child) by comparing to their average. The accuracy is improved from the following perspective:
+
+* place the offset wisely (e.g. at the sample average).
+* choose the projection vector wisely (e.g. random or principle components).
+* using more projections (but longer building time and larger index).
+* using more binary trees (also longer building time and larger index).
 
 
 
