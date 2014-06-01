@@ -1,14 +1,16 @@
 panns -- Nearest Neighbor Search
 ====
 
-panns stands for "Python Approximate Nearest Neighbor Search", which is an optimized python library for searching k-nearest neighbors in very high dimensional spaces. E.g. one tyical use in semantic web is finding the most relevant documents in a big corpus of text. Currently, panns supports two distance metric: Euclidean and Cosine.
+panns stands for "Python Approximate Nearest Neighbor Search", which is an optimized python library for searching approximate k-nearest neighbors in very high dimensional spaces. E.g. one tyical use in semantic web is finding the most relevant documents in a big corpus of text. Currently, panns supports two distance metrics: Euclidean and Cosine.
 
 
-Features:
+
+## Features
 
 * Pure python implementation.
 * Optimized for large and high-dimension dataset (e.g. > 500).
 * Generate small index file with high query accuracy.
+* Support Euclidean and cosine distance metrics.
 * Support parallel building of indices.
 * Small memory usage and index can be shared among processes.
 * Support raw, csv and [HDF5](http://www.hdfgroup.org/HDF5/) datasets.
@@ -127,7 +129,7 @@ One thing worth pointing out is the evaluation here is far from thorough and com
 
 ## Discussion
 
-Any suggestions, questions and related discussions are welcome. You can post and find relevant information in [panns-group](https://groups.google.com/forum/#!forum/panns) .
+Any suggestions, questions and related discussions are warmly welcome. You can post and find relevant information in [panns-group](https://groups.google.com/forum/#!forum/panns) .
 
 
 
