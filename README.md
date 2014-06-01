@@ -9,7 +9,7 @@ from panns import *
 
 p1 = PannsIndex('angular')    # index using cosine distance metric
 p2 = PannsIndex('euclidean')  # index using Euclidean distance metric
-
+...
 ```
 
 Technically, panns is only a small function module in one of our ongoing projects. The reason we release it as a separate package is we realized it is actually very difficult to find an easy-to-use tool which can perform efficient k-NN search with satisfying accuracy in high dimensional space. High dimensionality in this context refers to those datasets having hundreds of features, which is already far beyond the capability of standard [k-d tree](http://en.wikipedia.org/wiki/K-d_tree).
