@@ -4,7 +4,7 @@ setup(
     name='panns',
     version='0.1',
     packages=['panns',],
-    description = 'Python Approximate Nearest Neighbour Search',
+    description = 'Python Approximate Nearest Neighbor / Neighbour Search',
     #long_description=open('README.md').read(),
     author = 'Liang Wang',
     author_email = 'ryanrhymes@gmail.com',
