@@ -77,6 +77,6 @@ p.build(100)
 
 ## Discussion
 
-Any suggestions, questions and related discussions are welcome and can be found here https://groups.google.com/forum/#!forum/panns
+Any suggestions, questions and related discussions are welcome and can be found in [panns-group](https://groups.google.com/forum/#!forum/panns)
 
 ## Future Work
