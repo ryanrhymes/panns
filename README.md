@@ -119,7 +119,7 @@ Evaluation in this section is simply done by comparing against Annoy. Annoy is a
 
 Compared with Annoy, panns can achieve higher accuracy with much smaller index file. The reason was actually already briefly discussed in "Theory" section. Generally speaking, the higher accuracy is achieved by placing the offset at sample average; while the smaller index is achieved by reusing the projection vectors.
 
-One thing worth pointing out is the evaluation here is far from thorough and comprehensive, other evaluations are highly welcome.
+One thing worth pointing out is the evaluation here is far from thorough and comprehensive, other evaluations are highly welcome and we are always ready to link.
 
 
 
@@ -130,3 +130,7 @@ Any suggestions, questions and related discussions are welcome and can be found 
 
 
 ## Future Work
+
+* mmap of index file does not seem working at the moment.
+* Improve query performance by parallelism.
+* More thorough evaluations are needed.
