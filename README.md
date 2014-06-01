@@ -37,5 +37,6 @@ n = p.query(v, 10)
 
 ## Discussion
 
+Any suggestions, questions and related discussions are welcome and can be found here https://groups.google.com/forum/#!forum/panns
 
 ## Future Work
