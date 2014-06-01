@@ -51,11 +51,10 @@ p.build(50)
 p.save('test.idx')
 ```
 
-Besides using "add_vector(v)" function, panns supports multiple ways of loading a dataset. For extremely large dataset, HDF5 is recommended though the building performance will be significantly degraded.
+Besides using "add_vector(v)" function, panns supports multiple ways of loading a dataset. For those extremely large datasets, HDF5 is recommended though the building performance will be significantly degraded.
 
 ```python
-
-p = PannsIndex('angular')
+# Datasets can be loaded in the following ways
 p.load_matrix(A)                     # a list of row vectors or a numpy matrix
 p.load_csv(fname, sep=',')           # a csv file with specified separator
 p.load_hdf5(fname, dataset='panns')  # a HDF5 file with specified dataset
