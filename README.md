@@ -14,7 +14,7 @@ sudo pip install scipy --upgrade
 ```
 
 
-The installation of panns is very straightforward. You can either install it directly from PyPI, or download the source code then install manually.
+The installation of panns is very straightforward. You can either install it directly from PyPI (probably the easiest way), or download the source code then install manually.
 ```bash
 sudo pip install panns --upgrade
 ```
@@ -72,6 +72,11 @@ p.parallelize(True)
 p.build(100)
 
 ```
+
+
+## Theory In a Nutshell
+
+Random projection
 
 
 
