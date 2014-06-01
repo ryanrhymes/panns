@@ -60,12 +60,15 @@ panns assumes that the dataset is a row-based the matrix (e.g. m x n), where eac
 
 from panns import *
 
+# create an index of Euclidean distance
 p = PannsIndex('euclidean')
 
+# generate a 1000 x 100 dataset
 for i in xrange(1000):
     v = gaussian_vector(100)
     p.add_vector(v)
 
+# build the index and save to a file
 p.build(50)
 p.save('test.idx')
 ```
