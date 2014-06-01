@@ -6,10 +6,11 @@ panns stands for "Python Approximate Nearest Neighbor Search", which is an optim
 
 Features:
 
-* Support raw, CSV and HDF5 datasets.
+* Pure python implementation.
+* Small index file with high accuracy.
 * Support parallel building of indices.
-* Generate smaller index file than other libraries.
-* Achieve higher accuracy.
+* Index can be shared among processes.
+* Support raw, csv and [HDF5](http://www.hdfgroup.org/HDF5/) datasets.
 
 
 
@@ -125,12 +126,12 @@ One thing worth pointing out is the evaluation here is far from thorough and com
 
 ## Discussion
 
-Any suggestions, questions and related discussions are welcome and can be found in [panns-group](https://groups.google.com/forum/#!forum/panns) .
+Any suggestions, questions and related discussions are welcome. You can post and find relevant information in [panns-group](https://groups.google.com/forum/#!forum/panns) .
 
 
 
 ## Future Work
 
-* mmap of index file does not seem working at the moment.
+* Implement mmap on index file to speed up index loading.
 * Improve query performance by parallelism.
-* More thorough evaluations are needed.
+* Perform more thorough evaluations.
