@@ -12,7 +12,7 @@ p2 = PannsIndex('euclidean')  # index using Euclidean distance metric
 ...
 ```
 
-Technically, panns is only a small function module in one of our ongoing projects. The reason we release it as a separate package is we realized it is actually very difficult to find an easy-to-use tool which can perform efficient k-NN search with satisfying accuracy in high dimensional space. High dimensionality in this context refers to those datasets having hundreds of features, which is already far beyond the capability of standard [k-d tree](http://en.wikipedia.org/wiki/K-d_tree).
+Technically, panns is only a small function module in one of our ongoing projects. The reason we release it as a separate package is we realized it is actually very difficult to find an easy-to-use tool which can perform efficient k-NN search with satisfying accuracy in high dimensional space. High dimensionality in this context refers to those datasets having **hundreds of features**, which is already far beyond the capability of standard [k-d tree](http://en.wikipedia.org/wiki/K-d_tree).
 
 panns is developed by [Liang Wang](http://cs.helsinki.fi/liang.wang) @ Helsinki University. If you have any questions, you can either contact me via email `liang.wang[at]helsinki.fi` or post in [panns-group](https://groups.google.com/forum/#!forum/panns).
 
