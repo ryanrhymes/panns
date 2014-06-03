@@ -2,7 +2,7 @@ panns -- Nearest Neighbor Search
 ================================
 
 
-![Downloads](https://pypip.in/d/panns/badge.png "Downloads")  ![License](https://pypip.in/license/gensim/badge.png "License")
+![Downloads](https://pypip.in/d/panns/badge.png "Downloads") . ![License](https://pypip.in/license/gensim/badge.png "License")
 
 panns stands for "Python Approximate Nearest Neighbor Search", which is an optimized python library for searching [approximate k-nearest neighbors](http://en.wikipedia.org/wiki/Nearest_neighbor_search#Approximate_nearest_neighbor) in very high dimensional spaces. E.g. one typical use in semantic web is finding the most relevant documents in a big text corpus. Currently, panns supports two distance metrics: Euclidean and cosine.
 
