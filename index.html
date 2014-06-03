@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset='utf-8'>
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link href='https://fonts.googleapis.com/css?family=Architects+Daughter' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen" />
+    <link rel="stylesheet" type="text/css" href="stylesheets/pygment_trac.css" media="screen" />
+    <link rel="stylesheet" type="text/css" href="stylesheets/print.css" media="print" />
+
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+    <title>Panns by ryanrhymes</title>
+  </head>
+
+  <body>
+    <header>
+      <div class="inner">
+        <h1>Panns</h1>
+        <h2>Python Approximate Nearest Neighbor Search in very high dimensional space with optimized indexing.</h2>
+        <a href="https://github.com/ryanrhymes/panns" class="button"><small>View project on</small>GitHub</a>
+      </div>
+    </header>
+
+    <div id="content-wrapper">
+      <div class="inner clearfix">
+        <section id="main-content">
+          <h1>
+<a name="panns----nearest-neighbor-search" class="anchor" href="#panns----nearest-neighbor-search"><span class="octicon octicon-link"></span></a>panns -- Nearest Neighbor Search</h1>
+
+<p>panns stands for "Python Approximate Nearest Neighbor Search", which is an optimized python library for searching <a href="http://en.wikipedia.org/wiki/Nearest_neighbor_search#Approximate_nearest_neighbor">approximate k-nearest neighbors</a> in very high dimensional spaces. E.g. one typical use in semantic web is finding the most relevant documents in a big text corpus. Currently, panns supports two distance metrics: Euclidean and cosine.</p>
+
+<div class="highlight highlight-python"><pre>
+<span class="kn">from</span> <span class="nn">panns</span> <span class="kn">import</span> <span class="o">*</span>
+
+<span class="n">p1</span> <span class="o">=</span> <span class="n">PannsIndex</span><span class="p">(</span><span class="s">'angular'</span><span class="p">)</span>    <span class="c"># index using cosine distance metric</span>
+<span class="n">p2</span> <span class="o">=</span> <span class="n">PannsIndex</span><span class="p">(</span><span class="s">'euclidean'</span><span class="p">)</span>  <span class="c"># index using Euclidean distance metric</span>
+<span class="o">...</span>
+</pre></div>
+
+<p>Technically, panns is only a small function module in one of our ongoing projects. The reason we release it as a separate package is we realized it is actually very difficult to find an easy-to-use tool which can perform efficient k-NN search with satisfying accuracy in high dimensional space. High dimensionality in this context refers to those datasets having <strong>hundreds of features</strong>, which is already far beyond the capability of standard <a href="http://en.wikipedia.org/wiki/K-d_tree">k-d tree</a>.</p>
+
+<p>panns is developed by <a href="http://cs.helsinki.fi/liang.wang">Liang Wang</a> @ Helsinki University. If you have any questions, you can either contact me via email <code>liang.wang[at]helsinki.fi</code> or post in <a href="https://groups.google.com/forum/#!forum/panns">panns-group</a>.</p>
+
+<h2>
+<a name="features" class="anchor" href="#features"><span class="octicon octicon-link"></span></a>Features</h2>
+
+<ul>
+<li>Pure python implementation.</li>
+<li>Optimized for large and high-dimension dataset (e.g. &gt; 500).</li>
+<li>Generate small index file with high query accuracy.</li>
+<li>Support Euclidean and cosine distance metrics.</li>
+<li>Support parallel building of indices.</li>
+<li>Small memory usage and index can be shared among processes.</li>
+<li>Support raw, csv and <a href="http://www.hdfgroup.org/HDF5/">HDF5</a> datasets.</li>
+</ul><h2>
+<a name="installation" class="anchor" href="#installation"><span class="octicon octicon-link"></span></a>Installation</h2>
+
+<p>Algebra operations in panns rely on both <a href="http://www.numpy.org/">Numpy</a> and <a href="http://www.scipy.org/">Scipy</a>, and HDF5 operations rely on <a href="http://www.h5py.org/">h5py</a>. Please make sure you have these three packages properly installed before using panns. The installation can be done by the following shell commands.</p>
+
+<div class="highlight highlight-bash"><pre>sudo pip install numpy --upgrade
+sudo pip install scipy --upgrade
+sudo pip install h5py --upgrade
+</pre></div>
+
+<p>The installation of panns is very straightforward. You can either install it directly from PyPI (probably the easiest way), or download the source code then install manually.</p>
+
+<div class="highlight highlight-bash"><pre>sudo pip install panns --upgrade
+</pre></div>
+
+<p>If you are interested in the source code or even want to contribute to make it faster and better, you can clone the code from Github.</p>
+
+<div class="highlight highlight-bash"><pre>git clone git@github.com:ryanrhymes/panns.git
+</pre></div>
+
+<h2>
+<a name="quick-start" class="anchor" href="#quick-start"><span class="octicon octicon-link"></span></a>Quick Start</h2>
+
+<p>panns assumes that the dataset is a row-based the matrix (e.g. m x n), where each row represents a data point from an n-dimension feature space. The code snippet below first constructs a 1000 by 100 data matrix, then builds an index of 50 binary trees and saves it to a file.</p>
+
+<div class="highlight highlight-python"><pre>
+<span class="kn">from</span> <span class="nn">panns</span> <span class="kn">import</span> <span class="o">*</span>
+
+<span class="c"># create an index of Euclidean distance</span>
+<span class="n">p</span> <span class="o">=</span> <span class="n">PannsIndex</span><span class="p">(</span><span class="s">'euclidean'</span><span class="p">)</span>
+
+<span class="c"># generate a 1000 x 100 dataset</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">xrange</span><span class="p">(</span><span class="mi">1000</span><span class="p">):</span>
+    <span class="n">v</span> <span class="o">=</span> <span class="n">gaussian_vector</span><span class="p">(</span><span class="mi">100</span><span class="p">)</span>
+    <span class="n">p</span><span class="o">.</span><span class="n">add_vector</span><span class="p">(</span><span class="n">v</span><span class="p">)</span>
+
+<span class="c"># build an index of 50 trees and save to a file</span>
+<span class="n">p</span><span class="o">.</span><span class="n">build</span><span class="p">(</span><span class="mi">50</span><span class="p">)</span>
+<span class="n">p</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="s">'test.idx'</span><span class="p">)</span>
+</pre></div>
+
+<p>Besides using <code>add_vector(v)</code> function, panns supports multiple ways of loading a dataset. For those extremely large datasets, <a href="http://www.hdfgroup.org/HDF5/">HDF5</a> is recommended though the building performance will be significantly degraded. However, the performance can be improved by enabling parallel building as shown later.</p>
+
+<div class="highlight highlight-python"><pre><span class="c"># datasets can be loaded in the following ways</span>
+<span class="n">p</span><span class="o">.</span><span class="n">load_matrix</span><span class="p">(</span><span class="n">A</span><span class="p">)</span>                     <span class="c"># load a list of row vectors or a numpy matrix</span>
+<span class="n">p</span><span class="o">.</span><span class="n">load_csv</span><span class="p">(</span><span class="n">fname</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="s">','</span><span class="p">)</span>           <span class="c"># load a csv file with specified separator</span>
+<span class="n">p</span><span class="o">.</span><span class="n">load_hdf5</span><span class="p">(</span><span class="n">fname</span><span class="p">,</span> <span class="n">dataset</span><span class="o">=</span><span class="s">'panns'</span><span class="p">)</span>  <span class="c"># load a HDF5 file with specified dataset</span>
+</pre></div>
+
+<p>The saved index can be loaded and shared among different processes for future use. Therefore, the query performance can be further improved by parallelism. The following code loads the previously generated index file, then performs a simple query. The query returns 10 approximate nearest neighbors.</p>
+
+<div class="highlight highlight-python"><pre>
+<span class="kn">from</span> <span class="nn">panns</span> <span class="kn">import</span> <span class="o">*</span>
+
+<span class="n">p</span> <span class="o">=</span> <span class="n">PannsIndex</span><span class="p">(</span><span class="s">'euclidean'</span><span class="p">)</span>
+<span class="n">p</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s">'test.idx'</span><span class="p">)</span>
+
+<span class="n">v</span> <span class="o">=</span> <span class="n">gaussian_vector</span><span class="p">(</span><span class="mi">100</span><span class="p">)</span>
+<span class="n">n</span> <span class="o">=</span> <span class="n">p</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span>
+</pre></div>
+
+<p>Usually, building index for a high dimensional dataset can be very time-consuming. panns tries to speed up this process from two perspectives: optimizing the code and taking advantage of the physical resources. If multiple cores are available, parallel building can be easily enabled as follows:</p>
+
+<div class="highlight highlight-python"><pre>
+<span class="kn">from</span> <span class="nn">panns</span> <span class="kn">import</span> <span class="o">*</span>
+
+<span class="n">p</span> <span class="o">=</span> <span class="n">PannsIndex</span><span class="p">(</span><span class="s">'angular'</span><span class="p">)</span>
+
+<span class="o">....</span>
+
+<span class="n">p</span><span class="o">.</span><span class="n">parallelize</span><span class="p">(</span><span class="bp">True</span><span class="p">)</span>
+<span class="n">p</span><span class="o">.</span><span class="n">build</span><span class="p">()</span>
+
+</pre></div>
+
+<h2>
+<a name="theory-in-a-nutshell" class="anchor" href="#theory-in-a-nutshell"><span class="octicon octicon-link"></span></a>Theory In a Nutshell</h2>
+
+<p>Simply put, approximate k-NN in panns is achieved by <a href="http://en.wikipedia.org/wiki/Locality-sensitive_hashing#Random_projection">random projection</a>. The index is built by constructing a binary tree. Each node of the tree represents a scalar-projection of certain data points, which are further divided into two groups (left- and right-child) by comparing to their average. The accuracy can be improved from the following perspective:</p>
+
+<ul>
+<li>Place the offset wisely (e.g. at the sample average).</li>
+<li>Choose the projection vector wisely (e.g. random or principle components).</li>
+<li>Use more projections (but longer building time and larger index).</li>
+<li>Use more binary trees (also longer building time and larger index).</li>
+</ul><p>The accuracy of approximate k-NN is usually achieved at the price of large index. panns aims to find the good trade-off of these two conflicting factors. Different from other libraries, panns reuses the projection vectors among different trees instead of generating a new random vector for each node. This can significantly reduces the index size when the dimension is high and trees are many. At the same time, reusing the projection vectors will not degrade the accuracy (see Evaluation section below).</p>
+
+<h2>
+<a name="evaluation" class="anchor" href="#evaluation"><span class="octicon octicon-link"></span></a>Evaluation</h2>
+
+<p>Evaluation in this section is simply done by comparing against Annoy. Annoy is a C++ implementation of similar functionality as panns, it is used in Spotify recommender system. In the evaluation, we used a 5000 x 200 dataset, namely 5000 200-dimension feature vectors. For fair comparison, both Annoy and panns use 128 binary trees, and evaluation was done with two distance metrics (Euclidean and cosine). The following table summarizes the results.</p>
+
+<table>
+<thead><tr>
+<th align="center"></th>
+<th align="center">panns (Euclidean)</th>
+<th align="center">Annoy (Euclidean)</th>
+<th align="center">panns (cosine)</th>
+<th align="center">Annoy (cosine)</th>
+</tr></thead>
+<tbody>
+<tr>
+<td align="center">Accuracy</td>
+<td align="center">69.2%</td>
+<td align="center">48.8%</td>
+<td align="center">70.1%</td>
+<td align="center">50.4%</td>
+</tr>
+<tr>
+<td align="center">Index Size</td>
+<td align="center">5.4 MB</td>
+<td align="center">20 MB</td>
+<td align="center">5.4 MB</td>
+<td align="center">11 MB</td>
+</tr>
+</tbody>
+</table><p>Compared with Annoy, panns can achieve higher accuracy with much smaller index file. The reason was actually already briefly discussed in "Theory" section. Generally speaking, the higher accuracy is achieved by placing the offset at sample average; while the smaller index is achieved by reusing the projection vectors.</p>
+
+<p>One thing worth pointing out is the evaluation here is far from thorough and comprehensive, other evaluations are highly welcome and we are always ready to link.</p>
+
+<h2>
+<a name="discussion" class="anchor" href="#discussion"><span class="octicon octicon-link"></span></a>Discussion</h2>
+
+<p>Any suggestions, questions and related discussions are warmly welcome. You can post and find relevant information in <a href="https://groups.google.com/forum/#!forum/panns">panns-group</a> .</p>
+
+<h2>
+<a name="future-work" class="anchor" href="#future-work"><span class="octicon octicon-link"></span></a>Future Work</h2>
+
+<ul>
+<li>Implement mmap on index file to speed up index loading.</li>
+<li>Improve query performance by parallelism.</li>
+<li>Perform more thorough evaluations.</li>
+</ul>
+        </section>
+
+        <aside id="sidebar">
+          <a href="https://github.com/ryanrhymes/panns/zipball/master" class="button">
+            <small>Download</small>
+            .zip file
+          </a>
+          <a href="https://github.com/ryanrhymes/panns/tarball/master" class="button">
+            <small>Download</small>
+            .tar.gz file
+          </a>
+
+          <p class="repo-owner"><a href="https://github.com/ryanrhymes/panns"></a> is maintained by <a href="https://github.com/ryanrhymes">ryanrhymes</a>.</p>
+
+          <p>This page was generated by <a href="https://pages.github.com">GitHub Pages</a> using the Architect theme by <a href="https://twitter.com/jasonlong">Jason Long</a>.</p>
+        </aside>
+      </div>
+    </div>
+
+            <script type="text/javascript">
+            var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+            document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+          </script>
+          <script type="text/javascript">
+            try {
+              var pageTracker = _gat._getTracker("UA-51583155-1");
+            pageTracker._trackPageview();
+            } catch(err) {}
+          </script>
+
+  </body>
+</html>
