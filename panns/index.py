@@ -263,20 +263,19 @@ class PannsIndex():
         return [ x for _, x in r[:c] ]
 
 
-    def save(self, fname='panns'):
+    def save(self, fname='panns.idx'):
         """
         The function saves the index in a file using cPickle.
 
         Parameters:
         fname: the index file name.
         """
-        f1 = open(fname + '.btr', 'wb')
-        f2 = open(fname + '.prj', 'wb')
+        f = open(fname, 'wb')
+        logger.info('dump random vectors ...')
+        pickle.dump(self.prj, f, -1)
         logger.info('dump binary trees ...')
         for tree in self.btr:
-            pickle.dump(tree, f1, -1)
-        logger.info('dump random vectors ...')
-        pickle.dump(self.prj, f2, -1)
+            pickle.dump(tree, f, -1)
         pass
 
 
@@ -289,10 +288,15 @@ class PannsIndex():
         """
         f = open(fname, 'rb')
         mm = mmap.mmap(f.fileno(), 0, access=mmap.ACCESS_READ)
-        logger.info('load binary trees ...')
-        self.btr = pickle.load(mm)
         logger.info('load random vectors ...')
         self.prj = pickle.load(mm)
+        logger.info('load binary trees ...')
+        self.btr = []
+        while True:
+            try:
+                self.btr.append(pickle.load(mm))
+            except:
+                break
         pass
 
 
