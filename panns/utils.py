@@ -11,6 +11,7 @@
 
 import logging
 import numpy
+import tempfile
 from scipy import linalg
 from scipy.spatial import distance
 
@@ -137,7 +138,7 @@ def recall(relevant, retrieved):
     return r
 
 
-def build_parallel(mtx, prj, K, t):
+def build_parallel(mtx, prj, shape_mtx, shape_prj, K, t):
     """
     The function for parallel building index. Implemented here because
     the default python serialization cannot pickle instance function.
@@ -149,6 +150,8 @@ def build_parallel(mtx, prj, K, t):
     """
     logger.info('pass %i ...' % t)
     numpy.random.seed(t**2)
+    mtx = numpy.memmap(mtx, dtype='float64', mode='r', shape=shape_mtx)
+    prj = numpy.memmap(prj, dtype='float64', mode='r', shape=shape_prj)
     tree = NaiveTree()
     children = range(len(mtx))
     make_tree_parallel(tree.root, children, mtx, prj, K)
@@ -182,3 +185,14 @@ def make_tree_parallel(parent, children, mtx, prj, K):
     make_tree_parallel(parent.l_child, l_child, mtx, prj, K)
     make_tree_parallel(parent.r_child, r_child, mtx, prj, K)
     return
+
+
+def make_mmap(mtx, shape):
+    m, n  = shape
+    fname = tempfile.mkstemp()[1]
+    logger.info('mmaping the data to %s ...' % fname)
+    fpw = numpy.memmap(fname, dtype='float64', mode='w+', shape=(m,n))
+    for i in xrange(m):
+        fpw[i] = mtx[i]
+    del fpw
+    return fname

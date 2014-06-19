@@ -110,10 +110,18 @@ class PannsIndex():
         num_prj = int(2 ** (numpy.log2(len(self.mtx) / self.K) + 1))
         self.prj = self.random_directions(num_prj)
         if self.parallel:
+            # create mmap files and pass file name
+            shape_mtx = (len(self.mtx), self.dim)
+            shape_prj = (len(self.prj), self.dim)
+            mmap_mtx = make_mmap(self.mtx, shape_mtx)
+            mmap_prj = make_mmap(self.prj, shape_prj)
             num_cores = multiprocessing.cpu_count()
             pool = multiprocessing.Pool(num_cores)
-            tbtr = [ pool.apply_async(build_parallel, [self.mtx, self.prj, self.K, t]) for t in xrange(c) ]
+            tbtr = [ pool.apply_async(build_parallel, [mmap_mtx, mmap_prj, shape_mtx, shape_prj, self.K, t]) for t in xrange(c) ]
             self.btr = [ r.get() for r in tbtr ]
+            # clean the mmap files
+            os.remove(mmap_mtx)
+            os.remove(mmap_prj)
         else:
             self.build_sequential(c)
         pass
@@ -262,10 +270,11 @@ class PannsIndex():
         fname: the index file name.
         """
         f = open(fname, 'wb')
+        f2 = open(fname + '.prj', 'wb')
         logger.info('dump binary trees ...')
         pickle.dump(self.btr, f, -1)
         logger.info('dump random vectors ...')
-        pickle.dump(self.prj, f, -1)
+        pickle.dump(self.prj, f2, -1)
         pass
 
 

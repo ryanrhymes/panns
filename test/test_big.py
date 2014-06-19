@@ -21,16 +21,17 @@ from scipy import linalg
 
 
 def test_big_data():
-    rows, cols = 1000000, 1000
+    rows, cols = 10000, 1000
     logger.info('start building %i x %i matrix ...' % (rows, cols))
     vecs = numpy.random.normal(0,1,(rows,cols))
     pidx = PannsIndex(cols, 'euclidean')
     logger.info('finish building  %i x %i matrix.' % (rows, cols))
     pidx.load_matrix(vecs)
 
+    ntrees = 16
     logger.info('start building the index ...')
     pidx.parallelize(True)
-    pidx.build(1)
+    pidx.build(ntrees)
     logger.info('finish buliding the index.')
 
     logger.info('save index file ...')
