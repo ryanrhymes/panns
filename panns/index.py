@@ -199,17 +199,18 @@ class PannsIndex():
         c: number of neighbors.
         """
         nns = None
-        if p.n_list is not None:
-            return p.n_list
-        t = numpy.dot(self.prj[p.projection], v) - p.offset
+        #if p.nlst is not None:
+        if hasattr(p, 'nlst'):
+            return p.nlst
+        t = numpy.dot(self.prj[p.proj], v) - p.ofst
         if t > 0:
-            nns = self.get_ann(p.r_child, v, c)
+            nns = self.get_ann(p.rchd, v, c)
             if len(nns) < c:
-                nns += self.get_ann(p.l_child, v, c)
+                nns += self.get_ann(p.lchd, v, c)
         else:
-            nns = self.get_ann(p.l_child, v, c)
+            nns = self.get_ann(p.lchd, v, c)
             if len(nns) < c:
-                nns += self.get_ann(p.r_child, v, c)
+                nns += self.get_ann(p.rchd, v, c)
         return nns
 
 
