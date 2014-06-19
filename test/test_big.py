@@ -28,7 +28,7 @@ def test_big_data():
     logger.info('finish building  %i x %i matrix.' % (rows, cols))
     pidx.load_matrix(vecs)
 
-    ntrees = 16
+    ntrees = 128
     logger.info('start building the index ...')
     pidx.parallelize(True)
     pidx.build(ntrees)

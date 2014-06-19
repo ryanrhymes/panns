@@ -149,9 +149,9 @@ def build_parallel(mtx, prj, shape_mtx, shape_prj, K, t):
     t:   index of binary trees.
     """
     logger.info('pass %i ...' % t)
-    numpy.random.seed(t**2)
     mtx = numpy.memmap(mtx, dtype='float64', mode='r', shape=shape_mtx)
     prj = numpy.memmap(prj, dtype='float64', mode='r', shape=shape_prj)
+    numpy.random.seed(t**2)
     tree = NaiveTree()
     children = range(len(mtx))
     make_tree_parallel(tree.root, children, mtx, prj, K)

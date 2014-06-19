@@ -110,7 +110,7 @@ class PannsIndex():
         num_prj = int(2 ** (numpy.log2(len(self.mtx) / self.K) + 1))
         self.prj = self.random_directions(num_prj)
         if self.parallel:
-            # create mmap files and pass file name
+            # create temporary mmap files
             shape_mtx = (len(self.mtx), self.dim)
             shape_prj = (len(self.prj), self.dim)
             mmap_mtx = make_mmap(self.mtx, shape_mtx)
@@ -119,7 +119,8 @@ class PannsIndex():
             pool = multiprocessing.Pool(num_cores)
             tbtr = [ pool.apply_async(build_parallel, [mmap_mtx, mmap_prj, shape_mtx, shape_prj, self.K, t]) for t in xrange(c) ]
             self.btr = [ r.get() for r in tbtr ]
-            # clean the mmap files
+            pool.terminate()
+            # delete temporary mmap files
             os.remove(mmap_mtx)
             os.remove(mmap_prj)
         else:
@@ -262,17 +263,18 @@ class PannsIndex():
         return [ x for _, x in r[:c] ]
 
 
-    def save(self, fname='panns.idx'):
+    def save(self, fname='panns'):
         """
         The function saves the index in a file using cPickle.
 
         Parameters:
         fname: the index file name.
         """
-        f = open(fname, 'wb')
+        f1 = open(fname + '.btr', 'wb')
         f2 = open(fname + '.prj', 'wb')
         logger.info('dump binary trees ...')
-        pickle.dump(self.btr, f, -1)
+        for tree in self.btr:
+            pickle.dump(tree, f1, -1)
         logger.info('dump random vectors ...')
         pickle.dump(self.prj, f2, -1)
         pass
