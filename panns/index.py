@@ -153,21 +153,21 @@ class PannsIndex():
         children: a list of children node indice.
         """
         if len(children) <= self.K:
-            parent.n_list = children
+            parent.nlst = children
             return
-        parent.projection = numpy.random.randint(len(self.prj))
-        u = self.prj[parent.projection]
-        parent.offset = self.metric.split(u, children, self.mtx)
+        parent.proj = numpy.random.randint(len(self.prj))
+        u = self.prj[parent.proj]
+        parent.ofst = self.metric.split(u, children, self.mtx)
         l_child, r_child = [], []
         for i in children:
-            if self.metric.side(self.mtx[i], u, parent.offset):
+            if self.metric.side(self.mtx[i], u, parent.ofst):
                 r_child.append(i)
             else:
                 l_child.append(i)
-        parent.l_child = Node()
-        parent.r_child = Node()
-        self.make_tree(parent.l_child, l_child)
-        self.make_tree(parent.r_child, r_child)
+        parent.lchd = Node()
+        parent.rchd= Node()
+        self.make_tree(parent.lchd, l_child)
+        self.make_tree(parent.rchd, r_child)
         return
 
 

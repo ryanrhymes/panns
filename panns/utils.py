@@ -20,11 +20,7 @@ logger = logging.getLogger('panns.utils')
 
 
 class Node():
-    projection = None
-    offset = None
-    l_child = None
-    r_child = None
-    n_list = None
+    __slots__ = ['proj', 'ofst', 'lchd', 'rchd', 'nlst']
     pass
 
 
@@ -169,21 +165,21 @@ def make_tree_parallel(parent, children, mtx, prj, K):
     K:        max number of data points on a leaf.
     """
     if len(children) <= K:
-        parent.n_list = children
+        parent.nlst = children
         return
-    parent.projection = numpy.random.randint(len(prj))
-    u = prj[parent.projection]
-    parent.offset = Metric.split(u, children, mtx)
+    parent.proj = numpy.random.randint(len(prj))
+    u = prj[parent.proj]
+    parent.ofst = Metric.split(u, children, mtx)
     l_child, r_child = [], []
     for i in children:
-        if Metric.side(mtx[i], u, parent.offset):
+        if Metric.side(mtx[i], u, parent.ofst):
             r_child.append(i)
         else:
             l_child.append(i)
-    parent.l_child = Node()
-    parent.r_child = Node()
-    make_tree_parallel(parent.l_child, l_child, mtx, prj, K)
-    make_tree_parallel(parent.r_child, r_child, mtx, prj, K)
+    parent.lchd = Node()
+    parent.rchd = Node()
+    make_tree_parallel(parent.lchd, l_child, mtx, prj, K)
+    make_tree_parallel(parent.rchd, r_child, mtx, prj, K)
     return
 
 
