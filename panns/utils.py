@@ -154,7 +154,7 @@ def build_parallel(mtx, prj, shape_mtx, shape_prj, K, t):
     return tree
 
 
-def make_tree_parallel(parent, children, mtx, prj, K):
+def make_tree_parallel(parent, children, mtx, prj, K, lvl=0):
     """
     Builds up a binary tree recursively, for parallel building.
 
@@ -164,18 +164,22 @@ def make_tree_parallel(parent, children, mtx, prj, K):
     mtx:      a row-based data set.
     K:        max number of data points on a leaf.
     """
-    if len(children) <= K:
+    if len(children) <= max(K, lvl):
         parent.nlst = children
         return
-    parent.proj = numpy.random.randint(len(prj))
-    u = prj[parent.proj]
-    parent.ofst = Metric.split(u, children, mtx)
-    l_child, r_child = [], []
-    for i in children:
-        if Metric.side(mtx[i], u, parent.ofst):
-            r_child.append(i)
-        else:
-            l_child.append(i)
+    l_child, r_child = None, None
+    for attempt in xrange(16):
+        parent.proj = numpy.random.randint(len(prj))
+        u = prj[parent.proj]
+        parent.ofst = Metric.split(u, children, mtx)
+        l_child, r_child = [], []
+        for i in children:
+            if Metric.side(mtx[i], u, parent.ofst):
+                r_child.append(i)
+            else:
+                l_child.append(i)
+        if len(l_child) > 0 and len(r_child) > 0:
+                break
     parent.lchd = Node()
     parent.rchd = Node()
     make_tree_parallel(parent.lchd, l_child, mtx, prj, K)
