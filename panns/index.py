@@ -155,30 +155,36 @@ class PannsIndex():
         pass
 
 
-    def make_tree(self, parent, children):
+    def make_tree(self, parent, children, lvl=0):
         """
         The actual function which builds up a tree with recursion.
 
         Parameters:
         parent:   the index of the parent node.
         children: a list of children node indice.
+        lvl:      mark the depth of the recursion.
         """
-        if len(children) <= self.K:
+        if len(children) <= max(self.K, lvl):
             parent.nlst = children
             return
-        parent.proj = numpy.random.randint(len(self.prj))
-        u = self.prj[parent.proj]
-        parent.ofst = self.metric.split(u, children, self.mtx)
-        l_child, r_child = [], []
-        for i in children:
-            if self.metric.side(self.mtx[i], u, parent.ofst):
-                r_child.append(i)
-            else:
-                l_child.append(i)
+        l_child, r_child = None, None
+        for attempt in xrange(16):
+            parent.proj = numpy.random.randint(len(self.prj))
+            u = self.prj[parent.proj]
+            parent.ofst = self.metric.split(u, children, self.mtx)
+            l_child, r_child = [], []
+            for i in children:
+                if self.metric.side(self.mtx[i], u, parent.ofst):
+                    r_child.append(i)
+                else:
+                    l_child.append(i)
+            if len(l_child) > 0 and len(r_child) > 0:
+                break
+        ###print '--- %.3f' % (len(l_child) / (len(r_child)+0.000001)), len(l_child), len(r_child), lvl
         parent.lchd = Node()
         parent.rchd= Node()
-        self.make_tree(parent.lchd, l_child)
-        self.make_tree(parent.rchd, r_child)
+        self.make_tree(parent.lchd, l_child, lvl+1)
+        self.make_tree(parent.rchd, r_child, lvl+1)
         return
 
 
