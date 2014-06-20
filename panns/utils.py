@@ -195,6 +195,6 @@ def make_mmap(mtx, shape, fname=None):
     return fname
 
 
-#def load_mmap(fname, shape):
-#    mtx = numpy.memmap(fname, dtype='float64', mode='r', shape=shape)
-#    return mtx
+def load_mmap(fname, shape):
+    mtx = numpy.memmap(fname, dtype='float64', mode='r', shape=shape)
+    return mtx

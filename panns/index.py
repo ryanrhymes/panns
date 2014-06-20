@@ -99,6 +99,23 @@ class PannsIndex():
         pass
 
 
+    def mmap_core_data(self):
+        """
+        Convert mtx and prj to mmap file to save memory space, very
+        useful when dealing with large dataset and parallel mode is
+        activated. Skip if the data is already mmaped.
+        """
+        if type(self.mtx) != numpy.memmap:
+            shape_mtx = (len(self.mtx), self.dim)
+            mmap_mtx = make_mmap(self.mtx, shape_mtx)
+            self.mtx = load_mmap(mmap_mtx, shape_mtx)
+        if type(self.prj) != numpy.memmap:
+            shape_prj = (len(self.prj), self.dim)
+            mmap_prj = make_mmap(self.prj, shape_prj)
+            self.prj = load_mmap(mmap_prj, shape_prj)
+        pass
+
+
     def build(self, c=50):
         """
         Build the index for a given data set using random projections.
@@ -111,18 +128,19 @@ class PannsIndex():
         self.prj = self.random_directions(num_prj)
         if self.parallel:
             # create temporary mmap files
-            shape_mtx = (len(self.mtx), self.dim)
-            shape_prj = (len(self.prj), self.dim)
-            mmap_mtx = make_mmap(self.mtx, shape_mtx)
-            mmap_prj = make_mmap(self.prj, shape_prj)
+            #shape_mtx = (len(self.mtx), self.dim)
+            #shape_prj = (len(self.prj), self.dim)
+            #mmap_mtx = make_mmap(self.mtx, shape_mtx)
+            #mmap_prj = make_mmap(self.prj, shape_prj)
+            self.mmap_core_data()
             num_cores = multiprocessing.cpu_count()
             pool = multiprocessing.Pool(num_cores)
-            tbtr = [ pool.apply_async(build_parallel, [mmap_mtx, mmap_prj, shape_mtx, shape_prj, self.K, t]) for t in xrange(c) ]
+            tbtr = [ pool.apply_async(build_parallel, [self.mtx.filename, self.prj.filename, self.mtx.shape, self.prj.shape, self.K, t]) for t in xrange(c) ]
             self.btr = [ r.get() for r in tbtr ]
             pool.terminate()
             # delete temporary mmap files
-            os.remove(mmap_mtx)
-            os.remove(mmap_prj)
+            #os.remove(mmap_mtx)
+            #os.remove(mmap_prj)
         else:
             self.build_sequential(c)
         pass
@@ -272,7 +290,7 @@ class PannsIndex():
         fname: the index file name.
         """
         f = open(fname, 'wb')
-        pickle.dump(self.info(), f, -1)
+        pickle.dump(self.basic_info(), f, -1)
         logger.info('dump random vectors to %s ...' % fname)
         pickle.dump(self.prj, f, -1)
         logger.info('dump binary trees to %s ...' % fname)
@@ -318,7 +336,7 @@ class PannsIndex():
         pass
 
 
-    def info(self):
+    def basic_info(self):
         """
         Return a dict containing the basic info of the object.
         """
@@ -326,17 +344,6 @@ class PannsIndex():
         d['mtx_shape'] = (len(self.mtx), self.dim)
         return d
 
-
-    # Todo: Either remove or enhance
-    def dump_rawdata(self, fname, vecs):
-        """
-        index dumping and loading needs improvements.
-        """
-        f = open(fname, 'wb')
-        for v in vecs:
-            f.write(pickle.dumps(v, -1))
-        f.close()
-        pass
 
 
     pass
