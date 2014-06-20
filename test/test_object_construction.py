@@ -40,7 +40,7 @@ def test_index_file():
     pidx = PannsIndex(cols, 'euclidean')
     pidx.load_matrix(vecs)
     pidx.parallelize(False)
-    pidx.build(128)
+    pidx.build(16)
 
     t = time.time()
     v = gaussian_vector(cols, True)

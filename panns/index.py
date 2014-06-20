@@ -272,12 +272,13 @@ class PannsIndex():
         fname: the index file name.
         """
         f = open(fname, 'wb')
-        logger.info('dump random vectors ...')
+        pickle.dump(self.info(), f, -1)
+        logger.info('dump random vectors to %s ...' % fname)
         pickle.dump(self.prj, f, -1)
-        logger.info('dump binary trees ...')
+        logger.info('dump binary trees to %s ...' % fname)
         for tree in self.btr:
             pickle.dump(tree, f, -1)
-        logger.info('dump raw dataset ...')
+        logger.info('dump raw dataset to %s ...' % (fname+'.npy'))
         make_mmap(self.mtx, (len(self.mtx),self.dim), fname+'.npy')
         pass
 
@@ -291,15 +292,18 @@ class PannsIndex():
         """
         f = open(fname, 'rb')
         mm = mmap.mmap(f.fileno(), 0, access=mmap.ACCESS_READ)
-        logger.info('load random vectors ...')
+        d = pickle.load(mm)
+        logger.info('load random vectors from %s...' % fname)
         self.prj = pickle.load(mm)
-        logger.info('load binary trees ...')
+        logger.info('load binary trees from %s ...' % fname)
         self.btr = []
         while True:
             try:
                 self.btr.append(pickle.load(mm))
             except:
                 break
+        logger.info('load raw dataset from %s ...' % (fname+'.npy'))
+        self.mtx = numpy.memmap(fname+'.npy', dtype='float64', mode='r', shape=d['mtx_shape'])
         pass
 
 
@@ -312,6 +316,15 @@ class PannsIndex():
         """
         self.parallel = enable
         pass
+
+
+    def info(self):
+        """
+        Return a dict containing the basic info of the object.
+        """
+        d = dict()
+        d['mtx_shape'] = (len(self.mtx), self.dim)
+        return d
 
 
     # Todo: Either remove or enhance

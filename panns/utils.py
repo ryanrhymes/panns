@@ -193,3 +193,8 @@ def make_mmap(mtx, shape, fname=None):
         fpw[i] = mtx[i]
     del fpw
     return fname
+
+
+#def load_mmap(fname, shape):
+#    mtx = numpy.memmap(fname, dtype='float64', mode='r', shape=shape)
+#    return mtx
