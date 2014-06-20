@@ -12,6 +12,7 @@
 import os
 import sys
 import mmap
+import shutil
 import logging
 import cPickle as pickle
 import multiprocessing
@@ -344,6 +345,15 @@ class PannsIndex():
         d['mtx_shape'] = (len(self.mtx), self.dim)
         return d
 
+
+    def __del__(self):
+        """
+        Clean up the temp files and etc.
+        """
+        tmpdir = tempfile.gettempdir()
+        if tmpdir is not None:
+            shutil.rmtree(tmpdir)
+        pass
 
 
     pass
