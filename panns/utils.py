@@ -183,9 +183,10 @@ def make_tree_parallel(parent, children, mtx, prj, K):
     return
 
 
-def make_mmap(mtx, shape):
+def make_mmap(mtx, shape, fname=None):
     m, n  = shape
-    fname = tempfile.mkstemp()[1]
+    if fname is None:
+        fname = tempfile.mkstemp()[1]
     logger.info('mmaping the data to %s ...' % fname)
     fpw = numpy.memmap(fname, dtype='float64', mode='w+', shape=(m,n))
     for i in xrange(m):

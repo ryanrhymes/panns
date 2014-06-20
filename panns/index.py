@@ -277,6 +277,8 @@ class PannsIndex():
         logger.info('dump binary trees ...')
         for tree in self.btr:
             pickle.dump(tree, f, -1)
+        logger.info('dump raw dataset ...')
+        make_mmap(self.mtx, (len(self.mtx),self.dim), fname+'.npy')
         pass
 
 
