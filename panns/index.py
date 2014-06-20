@@ -128,20 +128,12 @@ class PannsIndex():
         num_prj = int(2 ** (numpy.log2(len(self.mtx) / self.K) + 1))
         self.prj = self.random_directions(num_prj)
         if self.parallel:
-            # create temporary mmap files
-            #shape_mtx = (len(self.mtx), self.dim)
-            #shape_prj = (len(self.prj), self.dim)
-            #mmap_mtx = make_mmap(self.mtx, shape_mtx)
-            #mmap_prj = make_mmap(self.prj, shape_prj)
             self.mmap_core_data()
             num_cores = multiprocessing.cpu_count()
             pool = multiprocessing.Pool(num_cores)
             tbtr = [ pool.apply_async(build_parallel, [self.mtx.filename, self.prj.filename, self.mtx.shape, self.prj.shape, self.K, t]) for t in xrange(c) ]
             self.btr = [ r.get() for r in tbtr ]
             pool.terminate()
-            # delete temporary mmap files
-            #os.remove(mmap_mtx)
-            #os.remove(mmap_prj)
         else:
             self.build_sequential(c)
         pass
