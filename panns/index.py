@@ -352,7 +352,10 @@ class PannsIndex():
         """
         tmpdir = tempfile.gettempdir()
         if tmpdir is not None:
-            shutil.rmtree(tmpdir)
+            try:
+                shutil.rmtree(tmpdir)
+            except:
+                pass
         pass
 
 
