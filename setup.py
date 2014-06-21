@@ -1,6 +1,6 @@
 from distutils.core import setup
 
-VER = '0.1.2'
+VER = '0.1.3'
 
 setup(
     name='panns',
