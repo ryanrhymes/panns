@@ -180,6 +180,7 @@ class PannsIndex():
                     l_child.append(i)
             if len(l_child) > 0 and len(r_child) > 0:
                 break
+        #print '--- %.3f' % (len(l_child) / (len(r_child)+0.0000001)), len(l_child), len(r_child), lvl
         parent.lchd = Node()
         parent.rchd= Node()
         self.make_tree(parent.lchd, l_child, lvl+1)
