@@ -202,7 +202,7 @@ class PannsIndex():
                 r.add( (self.metric.distance(self.mtx[idx], v), idx) )
         r = list(r)
         r.sort()
-        return [ x for _, x in r[:c]]
+        return [ (y,x) for x, y in r[:c]]
 
 
     def get_ann(self, p, v, c):
