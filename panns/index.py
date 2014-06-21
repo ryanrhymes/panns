@@ -35,7 +35,7 @@ class PannsIndex():
     data set is assumed normallized where data poit has length 1.
     """
 
-    def __init__(self, dim, distance_metric='euclidean'):
+    def __init__(self, dim=None, distance_metric='euclidean'):
         """
         Parameters:
         distance_metric: distance metric to use. euclidean or angular.
