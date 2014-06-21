@@ -50,11 +50,10 @@ class Metric():
         idxs: data points to project.
         mtx:  data set.
         """
-        v = numpy.zeros(len(u))
+        v = numpy.zeros(len(u), dtype='float64')
         for i in idxs:
             v += mtx[i]
-        v = v / len(idxs)
-        a = numpy.dot(u, v)
+        a = numpy.dot(u, v) / len(idxs)
         return a
 
 
@@ -68,7 +67,13 @@ class Metric():
         u: random vector.
         v: data point to project.
         """
-        return numpy.dot(u, v) - offset > 0
+        r = None
+        x = numpy.dot(u, v) - offset
+        if abs(x) < 1e-12:
+            r = ( numpy.random.uniform(0,1,1)[0] > 0.5 )
+        else:
+            r = ( x > 0 )
+        return r
 
     pass
 
