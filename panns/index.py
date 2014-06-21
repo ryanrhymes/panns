@@ -199,10 +199,10 @@ class PannsIndex():
         for tree in self.btr:
             idxs = self.get_ann(tree.root, v, c)
             for idx in idxs:
-                r.add( (self.metric.distance(self.mtx[idx], v), idx) )
+                r.add( (idx, self.metric.distance(self.mtx[idx], v)) )
         r = list(r)
-        r.sort()
-        return [ (y,x) for x, y in r[:c]]
+        r.sort(key = lambda x: x[1])
+        return r[:c]
 
 
     def get_ann(self, p, v, c):
@@ -274,10 +274,10 @@ class PannsIndex():
         """
         r = list()
         for i in xrange(len(self.mtx)):
-            t = ( self.metric.distance(self.mtx[i],v), i )
+            t = ( i, self.metric.distance(self.mtx[i],v) )
             r.append(t)
-        r.sort()
-        return [ x for _, x in r[:c] ]
+        r.sort(key = lambda x: x[1])
+        return r[:c]
 
 
     def save(self, fname='panns.idx'):
