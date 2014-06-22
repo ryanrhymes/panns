@@ -17,9 +17,12 @@ import logging
 import cPickle as pickle
 import multiprocessing
 
-import h5py
-import numpy
-from scipy import linalg
+try:
+    import h5py
+    import numpy
+    from scipy import linalg
+except Exception, err:
+    print 'Warning:', err
 
 from utils import *
 
@@ -35,21 +38,21 @@ class PannsIndex():
     data set is assumed normallized where data poit has length 1.
     """
 
-    def __init__(self, dim=None, distance_metric='euclidean'):
+    def __init__(self, dimension=None, metric='euclidean', dtype='float32'):
         """
         Parameters:
         distance_metric: distance metric to use. euclidean or angular.
         """
-        self.dim = dim    # dimension of data
-        self.mtx = []     # list of row vectors
-        self.btr = []     # list of binary-tree
-        self.prj = []     # list of proj-planes
-        self.K = 20       # Need to be tweaked
+        self.dim = dimension    # dimension of data
+        self.mtx = []           # list of row vectors
+        self.btr = []           # list of binary-tree
+        self.prj = []           # list of proj-planes
+        self.K = 20             # Need to be tweaked
         self.parallel = False
 
-        if distance_metric=='euclidean':
+        if metric=='euclidean':
             self.metric = MetricEuclidean()
-        elif distance_metric=='angular':
+        elif metric=='angular':
             self.metric = MetricCosine()
         pass
 
