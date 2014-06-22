@@ -41,7 +41,7 @@ def test_annoy(annoy, v, ans):
 
 def test_panns(panns, v, ans):
     t = time.time()
-    n = panns.query(v, 10)
+    n = [ x for x, _  in panns.query(v, 10) ]
     r1 = precision(ans, n)
     r2 = recall(ans, n)
     print "Panns precision: %.3f\t recall: %.3f\t %.4f ms" % (r1, r2, (time.time()-t)*1000)
@@ -69,7 +69,7 @@ def compare_both(metric):
     for i in range(50):
         print '+'*30, 'test', i
         v = gaussian_vector(n, True)
-        ans = p.linear_search(v, 10)
+        ans = [ x for x, _ in p.linear_search(v, 10) ]
 
         t1, t2 = test_annoy(t, v, ans)
         t3, t4 = test_panns(p, v, ans)
