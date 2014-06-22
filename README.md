@@ -65,7 +65,7 @@ panns assumes that the dataset is a row-based the matrix (e.g. m x n), where eac
 from panns import *
 
 # create an index of Euclidean distance
-p = PannsIndex('euclidean')
+p = PannsIndex(dimension=100, metric='euclidean')
 
 # generate a 1000 x 100 dataset
 for i in xrange(1000):
@@ -92,7 +92,7 @@ The saved index can be loaded and shared among different processes for future us
 
 from panns import *
 
-p = PannsIndex('euclidean')
+p = PannsIndex(metric='euclidean')
 p.load('test.idx')
 
 v = gaussian_vector(100)
@@ -106,7 +106,7 @@ Usually, building index for a high dimensional dataset can be very time-consumin
 
 from panns import *
 
-p = PannsIndex('angular')
+p = PannsIndex(metric='angular')
 
 ....
 
