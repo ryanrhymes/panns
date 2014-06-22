@@ -34,7 +34,7 @@ panns is developed by [Liang Wang](http://cs.helsinki.fi/liang.wang) @ Helsinki 
 
 ## Installation
 
-Algebra operations in panns rely on both [Numpy](http://www.numpy.org/) and [Scipy](http://www.scipy.org/), and HDF5 operations rely on [h5py](http://www.h5py.org/). Please make sure you have these three packages properly installed before using panns. The installation can be done by the following shell commands.
+Algebra operations in panns rely on both [Numpy](http://www.numpy.org/) and [Scipy](http://www.scipy.org/), and HDF5 operations rely on [h5py](http://www.h5py.org/). Note h5py is optional if you do not need operate on HDF5 files. Please make sure you have these packages properly installed before using the full features of panns. The installation can be done by the following shell commands.
 
 ```bash
 sudo pip install numpy --upgrade
