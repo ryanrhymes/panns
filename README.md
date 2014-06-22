@@ -132,7 +132,7 @@ The accuracy of approximate k-NN is usually achieved at the price of large index
 
 ## Evaluation
 
-Evaluation in this section is simply done by comparing against Annoy. Annoy is a C++ implementation of similar functionality as panns, it is used in Spotify recommender system. In the evaluation, we used a 5000 x 200 dataset, namely 5000 200-dimension feature vectors. For fair comparison, both Annoy and panns use 128 binary trees, and evaluation was done with two distance metrics (Euclidean and cosine). The following table summarizes the results.
+Evaluation in this section is simply done by comparing against Annoy. Annoy is a C++ implementation of similar functionality as panns, it is used in Spotify recommender system. In the evaluation, we used a 5000 x 200 dataset, namely 5000 200-dimension feature vectors. For fair comparison, both Annoy and panns use 128 binary trees, and evaluation was done with two distance metrics (Euclidean and cosine). The following table summarizes the results. (data type?)
 
 |            | panns (Euclidean) | Annoy (Euclidean) | panns (cosine) | Annoy (cosine) |
 |:----------:|:-----------------:|:-----------------:|:--------------:|:--------------:|
