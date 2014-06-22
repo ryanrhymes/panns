@@ -50,7 +50,7 @@ class Metric():
         idxs: data points to project.
         mtx:  data set.
         """
-        v = numpy.zeros(len(u), dtype='float64')
+        v = numpy.zeros(len(u), u.dtype)
         for i in idxs:
             v += mtx[i]
         a = numpy.dot(u, v) / len(idxs)
@@ -102,7 +102,7 @@ class MetricCosine(Metric):
     pass
 
 
-def gaussian_vector(size, normalize=False):
+def gaussian_vector(size, normalize=False, dtype='float32'):
     """
     Returns a (normalized) Gaussian random vector.
 
@@ -139,19 +139,19 @@ def recall(relevant, retrieved):
     return r
 
 
-def build_parallel(mtx, prj, shape_mtx, shape_prj, K, t):
+def build_parallel(mtx, prj, shape_mtx, shape_prj, K, dtype, t):
     """
     The function for parallel building index. Implemented here because
     the default python serialization cannot pickle instance function.
 
     Parameters:
-    mtx: a row-based data set.
+    mtx: a row-based data set, should be an numpy matrix.
     K:   max number of data points on a leaf.
     t:   index of binary trees.
     """
     logger.info('pass %i ...' % t)
-    mtx = numpy.memmap(mtx, dtype='float64', mode='r', shape=shape_mtx)
-    prj = numpy.memmap(prj, dtype='float64', mode='r', shape=shape_prj)
+    mtx = numpy.memmap(mtx, dtype=dtype, mode='r', shape=shape_mtx)
+    prj = numpy.memmap(prj, dtype=dtype, mode='r', shape=shape_prj)
     numpy.random.seed(t**2)
     tree = NaiveTree()
     children = range(len(mtx))
@@ -192,18 +192,18 @@ def make_tree_parallel(parent, children, mtx, prj, K, lvl=0):
     return
 
 
-def make_mmap(mtx, shape, fname=None):
+def make_mmap(mtx, shape, dtype, fname=None):
     m, n  = shape
     if fname is None:
         fname = tempfile.mkstemp()[1]
     logger.info('mmaping the data to %s ...' % fname)
-    fpw = numpy.memmap(fname, dtype='float64', mode='w+', shape=(m,n))
+    fpw = numpy.memmap(fname, dtype=dtype, mode='w+', shape=(m,n))
     for i in xrange(m):
         fpw[i] = mtx[i]
     del fpw
     return fname
 
 
-def load_mmap(fname, shape):
-    mtx = numpy.memmap(fname, dtype='float64', mode='r', shape=shape)
+def load_mmap(fname, shape, dtype):
+    mtx = numpy.memmap(fname, dtype=dtype, mode='r', shape=shape)
     return mtx

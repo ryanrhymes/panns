@@ -44,6 +44,7 @@ class PannsIndex():
         distance_metric: distance metric to use. euclidean or angular.
         """
         self.dim = dimension    # dimension of data
+        self.typ = dtype        # data type of data
         self.mtx = []           # list of row vectors
         self.btr = []           # list of binary-tree
         self.prj = []           # list of proj-planes
@@ -111,12 +112,12 @@ class PannsIndex():
         """
         if type(self.mtx) != numpy.memmap:
             shape_mtx = (len(self.mtx), self.dim)
-            mmap_mtx = make_mmap(self.mtx, shape_mtx)
-            self.mtx = load_mmap(mmap_mtx, shape_mtx)
+            mmap_mtx = make_mmap(self.mtx, shape_mtx, self.typ)
+            self.mtx = load_mmap(mmap_mtx, shape_mtx, self.typ)
         if type(self.prj) != numpy.memmap:
             shape_prj = (len(self.prj), self.dim)
-            mmap_prj = make_mmap(self.prj, shape_prj)
-            self.prj = load_mmap(mmap_prj, shape_prj)
+            mmap_prj = make_mmap(self.prj, shape_prj, self.typ)
+            self.prj = load_mmap(mmap_prj, shape_prj, self.typ)
         pass
 
 
@@ -134,7 +135,7 @@ class PannsIndex():
             self.mmap_core_data()
             num_cores = multiprocessing.cpu_count()
             pool = multiprocessing.Pool(num_cores)
-            tbtr = [ pool.apply_async(build_parallel, [self.mtx.filename, self.prj.filename, self.mtx.shape, self.prj.shape, self.K, t]) for t in xrange(c) ]
+            tbtr = [ pool.apply_async(build_parallel, [self.mtx.filename, self.prj.filename, self.mtx.shape, self.prj.shape, self.K, self.typ, t]) for t in xrange(c) ]
             self.btr = [ r.get() for r in tbtr ]
             pool.terminate()
         else:
@@ -254,7 +255,7 @@ class PannsIndex():
         Parameters:
         c: the number of principle components needed.
         """
-        return [ gaussian_vector(self.dim, True) for _ in xrange(c) ]
+        return [ gaussian_vector(self.dim, True, self.typ) for _ in xrange(c) ]
 
 
     def get_samples(self, c):
@@ -291,14 +292,14 @@ class PannsIndex():
         fname: the index file name.
         """
         f = open(fname, 'wb')
-        pickle.dump(self.basic_info(), f, -1)
+        pickle.dump(self.get_basic_info(), f, -1)
         logger.info('dump random vectors to %s ...' % fname)
         pickle.dump(self.prj, f, -1)
         logger.info('dump binary trees to %s ...' % fname)
         for tree in self.btr:
             pickle.dump(tree, f, -1)
         logger.info('dump raw dataset to %s ...' % (fname+'.npy'))
-        make_mmap(self.mtx, (len(self.mtx),self.dim), fname+'.npy')
+        make_mmap(self.mtx, (len(self.mtx),self.dim), self.typ, fname+'.npy')
         pass
 
 
@@ -311,9 +312,16 @@ class PannsIndex():
         """
         f = open(fname, 'rb')
         mm = mmap.mmap(f.fileno(), 0, access=mmap.ACCESS_READ)
+
+        # step 1, load the basic info
         d = pickle.load(mm)
+        self.set_basic_info(d)
+
+        # step 2, load the projection vectors
         logger.info('load random vectors from %s...' % fname)
         self.prj = pickle.load(mm)
+
+        # setp 3, load the binary trees
         logger.info('load binary trees from %s ...' % fname)
         self.btr = []
         while True:
@@ -321,8 +329,10 @@ class PannsIndex():
                 self.btr.append(pickle.load(mm))
             except:
                 break
+
+        # step 4, load the raw data set
         logger.info('load raw dataset from %s ...' % (fname+'.npy'))
-        self.mtx = numpy.memmap(fname+'.npy', dtype='float64', mode='r', shape=d['mtx_shape'])
+        self.mtx = numpy.memmap(fname+'.npy', dtype=self.typ, mode='r', shape=d['mtx_shape'])
         pass
 
 
@@ -337,13 +347,23 @@ class PannsIndex():
         pass
 
 
-    def basic_info(self):
+    def get_basic_info(self):
         """
         Return a dict containing the basic info of the object.
         """
         d = dict()
         d['mtx_shape'] = (len(self.mtx), self.dim)
+        d['typ'] = self.typ
         return d
+
+
+    def set_basic_info(self, d):
+        """
+        Set basic properties of the instance for a given dict.
+        """
+        self.dim = d['mtx_shape'][1]
+        self.typ = d['typ']
+        pass
 
 
     def __del__(self):
