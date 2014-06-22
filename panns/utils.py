@@ -69,7 +69,8 @@ class Metric():
         """
         r = None
         x = numpy.dot(u, v) - offset
-        if abs(x) < 1e-12:
+        ### Todo: need to be fixed for small value
+        if abs(x) < 1e-08:
             r = ( numpy.random.uniform(0,1,1)[0] > 0.5 )
         else:
             r = ( x > 0 )

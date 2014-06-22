@@ -98,6 +98,7 @@ class PannsIndex():
         fname: file name of the csv data set.
         sep:   the separator for the coordinates.
         """
+        ### Todo: need to be fixed!
         for line in open(fname, 'r'):
             v = [ numpy.float64(x) for x in line.split(sep) ]
             self.mtx.append(v)
@@ -184,6 +185,7 @@ class PannsIndex():
                     l_child.append(i)
             if len(l_child) > 0 and len(r_child) > 0:
                 break
+        ###print '---', (len(l_child)/(len(r_child)+0.0000001)), len(l_child), len(r_child), lvl
         parent.lchd = Node()
         parent.rchd= Node()
         self.make_tree(parent.lchd, l_child, lvl+1)
