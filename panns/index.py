@@ -320,11 +320,11 @@ class PannsIndex():
         self.set_basic_info(d)
 
         # step 2, load the projection vectors
-        logger.info('load random vectors from %s...' % fname)
+        logger.info('loading random vectors from %s...' % fname)
         self.prj = pickle.load(mm)
 
         # setp 3, load the binary trees
-        logger.info('load binary trees from %s ...' % fname)
+        logger.info('loading binary trees from %s ...' % fname)
         self.btr = []
         while True:
             try:
@@ -333,7 +333,7 @@ class PannsIndex():
                 break
 
         # step 4, load the raw data set
-        logger.info('load raw dataset from %s ...' % (fname+'.npy'))
+        logger.info('loading raw dataset from %s ...' % (fname+'.npy'))
         self.mtx = numpy.memmap(fname+'.npy', dtype=self.typ, mode='r', shape=d['mtx_shape'])
         pass
 
