@@ -24,7 +24,7 @@ def test_index_file():
 
     pidx = PannsIndex(cols, 'euclidean')
     pidx.load_matrix(vecs)
-    pidx.parallelize(False)
+    pidx.parallelize(True)
     pidx.build(16)
 
     t = time.time()
@@ -32,14 +32,13 @@ def test_index_file():
 
     t = time.time()
     print 'Test saving the index files ...'
-    pidx.save('mytest.idx', True)
+    pidx.save('mytest.idx', False)
     print 'Saving is done in %.3f s' % (time.time()-t)
 
     print 'Test loading the index and querying ...'
     t = time.time()
     pidx.load('mytest.idx')
     print 'Loading is done in %.3f s' % (time.time()-t)
-    #print pidx.prj
 
     t = time.time()
     r = pidx.query(v, 10)
