@@ -304,6 +304,8 @@ class PannsIndex():
         logger.info('dump raw dataset to %s ...' % (fname+'.npy'))
         if mmap:
             make_mmap(self.mtx, (len(self.mtx),self.dim), self.typ, fname+'.npy')
+        else:
+            numpy.save(open(fname+'.npy', 'wb'), self.mtx)
         pass
 
 
@@ -336,7 +338,12 @@ class PannsIndex():
 
         # step 4, load the raw data set
         logger.info('loading raw dataset from %s ...' % (fname+'.npy'))
-        self.mtx = numpy.memmap(fname+'.npy', dtype=self.typ, mode='r', shape=d['mtx_shape'])
+        try:
+            self.mtx = numpy.load(fname+'.npy')
+            logger.info('loading raw dataset as in-mem file ...')
+        except Exception, err:
+            self.mtx = numpy.memmap(fname+'.npy', dtype=self.typ, mode='r', shape=d['mtx_shape'])
+            logger.info('loading raw dataset as mmap file ...')
         pass
 
 
