@@ -286,12 +286,13 @@ class PannsIndex():
         return r[:c]
 
 
-    def save(self, fname='panns.idx'):
+    def save(self, fname='panns.idx', mmap=True):
         """
         The function saves the index in a file using cPickle.
 
         Parameters:
         fname: the index file name.
+        mmap:  enable mmap or not. Enable it if mem is small.
         """
         f = open(fname, 'wb')
         pickle.dump(self.get_basic_info(), f, -1)
@@ -301,7 +302,8 @@ class PannsIndex():
         for tree in self.btr:
             pickle.dump(tree, f, -1)
         logger.info('dump raw dataset to %s ...' % (fname+'.npy'))
-        make_mmap(self.mtx, (len(self.mtx),self.dim), self.typ, fname+'.npy')
+        if mmap:
+            make_mmap(self.mtx, (len(self.mtx),self.dim), self.typ, fname+'.npy')
         pass
 
 
