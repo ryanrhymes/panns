@@ -114,10 +114,6 @@ class PannsIndex():
             shape_mtx = (len(self.mtx), self.dim)
             mmap_mtx = make_mmap(self.mtx, shape_mtx, self.typ)
             self.mtx = load_mmap(mmap_mtx, shape_mtx, self.typ)
-        if not hasattr(self, 'prm') or type(self.prm) != numpy.memmap:
-            shape_prj = (len(self.prj), self.dim)
-            mmap_prj = make_mmap(self.prj, shape_prj, self.typ)
-            self.prm = load_mmap(mmap_prj, shape_prj, self.typ)
         pass
 
 
@@ -133,7 +129,7 @@ class PannsIndex():
             self.mmap_core_data()
             num_cores = multiprocessing.cpu_count()
             pool = multiprocessing.Pool(num_cores)
-            tbtr = [ pool.apply_async(build_parallel, [self.mtx.filename, self.prm.filename, self.mtx.shape, self.prm.shape, self.K, self.typ, t]) for t in xrange(c) ]
+            tbtr = [ pool.apply_async(build_parallel, [self.mtx.filename, self.mtx.shape, self.K, self.typ, t]) for t in xrange(c) ]
             self.btr = [ r.get() for r in tbtr ]
             pool.terminate()
         else:
@@ -248,8 +244,8 @@ class PannsIndex():
 
     def random_direction(self, seed):
         """
-        The function returns Gaussian random directions which are
-        used as projection plane.
+        The function returns a normalized random Gaussian vector
+        which is used as the projection plane.
 
         Parameters:
         seed: random seed for generating the gaussian vector

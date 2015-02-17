@@ -142,7 +142,7 @@ def recall(relevant, retrieved):
     return r
 
 
-def build_parallel(mtx, prj, shape_mtx, shape_prj, K, dtype, t):
+def build_parallel(mtx, shape_mtx, K, dtype, t):
     """
     The function for parallel building index. Implemented here because
     the default python serialization cannot pickle instance function.
@@ -154,15 +154,14 @@ def build_parallel(mtx, prj, shape_mtx, shape_prj, K, dtype, t):
     """
     logger.info('pass %i ...' % t)
     mtx = numpy.memmap(mtx, dtype=dtype, mode='r', shape=shape_mtx)
-    prj = numpy.memmap(prj, dtype=dtype, mode='r', shape=shape_prj)
     numpy.random.seed(t**2)
     tree = NaiveTree()
     children = range(len(mtx))
-    make_tree_parallel(tree.root, children, mtx, prj, K)
+    make_tree_parallel(tree.root, children, mtx, shape_mtx, dtype, K)
     return tree
 
 
-def make_tree_parallel(parent, children, mtx, prj, K, lvl=0):
+def make_tree_parallel(parent, children, mtx, shape_mtx, dtype, K, lvl=0):
     """
     Builds up a binary tree recursively, for parallel building.
 
@@ -177,8 +176,8 @@ def make_tree_parallel(parent, children, mtx, prj, K, lvl=0):
         return
     l_child, r_child = None, None
     for attempt in xrange(16):
-        parent.proj = numpy.random.randint(len(prj))
-        u = prj[parent.proj]
+        parent.proj = numpy.random.randint(2**32-1)
+        u = gaussian_vector(shape_mtx[1], True, dtype, parent.proj)
         parent.ofst = Metric.split(u, children, mtx)
         l_child, r_child = [], []
         for i in children:
@@ -190,8 +189,8 @@ def make_tree_parallel(parent, children, mtx, prj, K, lvl=0):
                 break
     parent.lchd = Node()
     parent.rchd = Node()
-    make_tree_parallel(parent.lchd, l_child, mtx, prj, K)
-    make_tree_parallel(parent.rchd, r_child, mtx, prj, K)
+    make_tree_parallel(parent.lchd, l_child, mtx, shape_mtx, dtype, K)
+    make_tree_parallel(parent.rchd, r_child, mtx, shape_mtx, dtype, K)
     return
 
 
