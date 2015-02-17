@@ -18,9 +18,9 @@ import cPickle as pickle
 import multiprocessing
 
 try:
-    import h5py
-    import numpy
     from scipy import linalg
+    import numpy
+    import h5py
 except Exception, err:
     print 'Warning:', err
 
