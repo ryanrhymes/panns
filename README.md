@@ -4,7 +4,7 @@ panns -- Nearest Neighbor Search
 
 ![Downloads](https://pypip.in/d/panns/badge.png "Downloads") . ![License](https://pypip.in/license/gensim/badge.png "License")
 
-*This version of PANNS generates random vectors beforehand, and save the actual vectors in the index file. I keep this branch for the purpose of compatibility, but eventually, I will stop maintaining this branch. We should switch to seed branch eventually.*
+*Note: This version of PANNS generates random vectors beforehand, and save the actual vectors in the index file. I keep this branch for the purpose of compatibility, but eventually, I will stop maintaining this branch. We should switch to seed branch eventually.*
 
 panns stands for "Python Approximate Nearest Neighbor Search", which is an optimized python library for searching [approximate k-nearest neighbors](http://en.wikipedia.org/wiki/Nearest_neighbor_search#Approximate_nearest_neighbor) in very high dimensional spaces. E.g. one typical use in semantic web is finding the most relevant documents in a big text corpus. Currently, panns supports two distance metrics: Euclidean and Angular (consine). For angular similarity, the dataset need to be normalized.
 
