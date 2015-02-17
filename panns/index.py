@@ -47,7 +47,7 @@ class PannsIndex():
         self.typ = dtype        # data type of data
         self.mtx = []           # list of row vectors
         self.btr = []           # list of binary-tree
-        self.prj = []           # list of proj-planes
+        self.prj = 2**32-1      # range of random seed
         self.K = 20             # Need to be tweaked
         self.parallel = False
 
@@ -130,8 +130,6 @@ class PannsIndex():
         Parameters:
         c: the number of binary trees in the index.
         """
-        num_prj = int(2 ** (numpy.log2(len(self.mtx) / self.K) + 1))
-        self.prj = self.random_directions(num_prj)
         if self.parallel:
             self.mmap_core_data()
             num_cores = multiprocessing.cpu_count()
@@ -174,8 +172,8 @@ class PannsIndex():
             return
         l_child, r_child = None, None
         for attempt in xrange(16):
-            parent.proj = numpy.random.randint(len(self.prj))
-            u = self.prj[parent.proj]
+            parent.proj = numpy.random.randint(self.prj)
+            u = self.random_direction(parent.proj)
             parent.ofst = self.metric.split(u, children, self.mtx)
             l_child, r_child = [], []
             for i in children:
@@ -224,7 +222,7 @@ class PannsIndex():
 
         if hasattr(p, 'nlst'):
             return p.nlst
-        t = numpy.dot(self.prj[p.proj], v) - p.ofst
+        t = numpy.dot(self.random_direction(p.proj), v) - p.ofst
         if t > 0:
             nns = self.get_ann(p.rchd, v, c)
             if len(nns) < c:
@@ -249,15 +247,15 @@ class PannsIndex():
         return u[:,:c].T
 
 
-    def random_directions(self, c):
+    def random_direction(self, seed):
         """
         The function returns Gaussian random directions which are
         used as projection plane.
 
         Parameters:
-        c: the number of principle components needed.
+        seed: random seed for generating the gaussian vector
         """
-        return [ gaussian_vector(self.dim, True, self.typ) for _ in xrange(c) ]
+        return gaussian_vector(self.dim, True, self.typ, seed)
 
 
     def get_samples(self, c):

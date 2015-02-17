@@ -104,13 +104,14 @@ class MetricCosine(Metric):
     pass
 
 
-def gaussian_vector(size, normalize=False, dtype='float32'):
+def gaussian_vector(size, normalize=False, dtype='float32', seed=None):
     """
     Returns a (normalized) Gaussian random vector.
 
     Parameters:
     normalize: the vector length is normalized to 1 if True.
     """
+    numpy.random.seed(seed)
     v = numpy.random.normal(0,1,size)
     if normalize:
         v = v / linalg.norm(v)
