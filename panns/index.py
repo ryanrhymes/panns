@@ -47,7 +47,6 @@ class PannsIndex():
         self.typ = dtype        # data type of data
         self.mtx = []           # list of row vectors
         self.btr = []           # list of binary-tree
-        self.prj = 2**32-1      # range of random seed
         self.K = 20             # Need to be tweaked
         self.parallel = False
 
@@ -172,7 +171,7 @@ class PannsIndex():
             return
         l_child, r_child = None, None
         for attempt in xrange(16):
-            parent.proj = numpy.random.randint(self.prj)
+            parent.proj = numpy.random.randint(2**32-1)
             u = self.random_direction(parent.proj)
             parent.ofst = self.metric.split(u, children, self.mtx)
             l_child, r_child = [], []
@@ -294,8 +293,6 @@ class PannsIndex():
         """
         f = open(fname, 'wb')
         pickle.dump(self.get_basic_info(), f, -1)
-        logger.info('dump random vectors to %s ...' % fname)
-        pickle.dump(self.prj, f, -1)
         logger.info('dump binary trees to %s ...' % fname)
         for tree in self.btr:
             pickle.dump(tree, f, -1)
@@ -321,11 +318,7 @@ class PannsIndex():
         d = pickle.load(mm)
         self.set_basic_info(d)
 
-        # step 2, load the projection vectors
-        logger.info('loading random vectors from %s...' % fname)
-        self.prj = pickle.load(mm)
-
-        # setp 3, load the binary trees
+        # setp 2, load the binary trees
         logger.info('loading binary trees from %s ...' % fname)
         self.btr = []
         while True:
@@ -334,7 +327,7 @@ class PannsIndex():
             except:
                 break
 
-        # step 4, load the raw data set
+        # step 3, load the raw data set
         logger.info('loading raw dataset from %s ...' % (fname+'.npy'))
         try:
             self.mtx = numpy.load(fname+'.npy')

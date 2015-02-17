@@ -62,7 +62,7 @@ def compare_both(metric):
 
     p = PannsIndex(n, metric)
     p.load_matrix(vecs)
-    p.parallelize(True)
+    p.parallelize(False)
     p.build(num_prj)
 
     r1,r2,r3,r4 = 0,0,0,0
