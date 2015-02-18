@@ -4,7 +4,7 @@ panns -- Nearest Neighbors Search
 
 ![Downloads](https://pypip.in/d/panns/badge.png "Downloads") . ![License](https://pypip.in/license/gensim/badge.png "License")
 
-If you do not have patience to read the whole story, here is a [shortcut](http://) which leads you to the example code.
+If you do not have patience to read, here is a [shortcut](http://) which leads you to the example code.
 
 ## Background
 
