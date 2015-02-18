@@ -4,9 +4,7 @@ panns -- Nearest Neighbors Search
 
 ![Downloads](https://pypip.in/d/panns/badge.png "Downloads") . ![License](https://pypip.in/license/gensim/badge.png "License")
 
-If you do not have patience to read, here is a [shortcut](http://) which leads you to the How-To.
-
-Or you can also jump to the [Quick Start](#quick-start) for example code.
+If you do not have patience to read, you can either jump to the [Quick Start] section directly for example code, or go to the [How-To]{https://github.com/ryanrhymes/panns/wiki/How-To} page.
 
 
 
