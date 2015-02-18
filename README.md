@@ -4,7 +4,7 @@ panns -- Nearest Neighbors Search
 
 ![Downloads](https://pypip.in/d/panns/badge.png "Downloads") . ![License](https://pypip.in/license/gensim/badge.png "License")
 
-> If you do not have patience to read, you can either directly jump to the "Quick Start" section below for example code, or go to the [How-To](https://github.com/ryanrhymes/panns/wiki/How-To) page in panns wiki.
+If you do not have patience to read, you can either directly jump to the "Quick Start" section below for example code, or go to the [How-To](https://github.com/ryanrhymes/panns/wiki/How-To) page in panns wiki.
 
 
 
@@ -66,6 +66,8 @@ git clone git@github.com:ryanrhymes/panns.git
 
 
 ## Quick Start
+
+### Create a panns instance
 
 panns assumes that the dataset is a row-based the matrix (e.g. m x n), where each row represents a data point from an n-dimension feature space. The code snippet below first constructs a 1000 by 100 data matrix, then builds an index of 50 binary trees and saves it to a file.
 
