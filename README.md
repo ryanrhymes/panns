@@ -31,10 +31,10 @@ panns is developed by [Liang Wang](http://cs.helsinki.fi/liang.wang) @ Cambridge
 * Pure python implementation.
 * Optimized for large and high-dimension dataset (e.g. > 500).
 * Generate small index file with high query accuracy.
-* Support Euclidean and cosine distance metrics.
+* Support both Euclidean and cosine distance metrics.
 * Support parallel building of indices.
 * Small memory usage and index can be shared among processes.
-* Support raw, csv and [HDF5](http://www.hdfgroup.org/HDF5/) datasets.
+* Support raw, csv, numpy and [HDF5](http://www.hdfgroup.org/HDF5/) datasets.
 
 
 
