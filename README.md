@@ -1,4 +1,4 @@
-panns -- Nearest Neighbor Search
+panns -- Nearest Neighbors Search
 ================================
 
 
