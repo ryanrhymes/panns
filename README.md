@@ -67,8 +67,6 @@ git clone git@github.com:ryanrhymes/panns.git
 
 ## Quick Start
 
-##### Create a panns instance
-
 panns assumes that the dataset is a row-based the matrix (e.g. m x n), where each row represents a data point from an n-dimension feature space. The code snippet below first constructs a 1000 by 100 data matrix, then builds an index of 50 binary trees and saves it to a file.
 
 ```python
@@ -99,6 +97,8 @@ p.load_csv(fname, sep=',')           # load a csv file with specified separator
 p.load_hdf5(fname, dataset='panns')  # load a HDF5 file with specified dataset
 ```
 
+#### Index a dataset
+
 The saved index can be loaded and shared among different processes for future use. Therefore, the query performance can be further improved by parallelism. The following code loads the previously generated index file, then performs a simple query. The query returns 10 approximate nearest neighbors.
 
 ```python
@@ -112,6 +112,7 @@ v = gaussian_vector(100)
 n = p.query(v, 10)
 ```
 
+#### Parallelize indexing
 
 Usually, building index for a high dimensional dataset can be very time-consuming. panns tries to speed up this process from two perspectives: optimizing the code and taking advantage of the physical resources. If multiple cores are available, parallel building can be easily enabled as follows:
 
