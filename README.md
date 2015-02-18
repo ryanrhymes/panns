@@ -19,7 +19,7 @@ Technically speaking, panns is only a small function module in one of our ongoin
 
 The reason that I decided to release PANNS as a standalone package is simple. During the development of Kvasir, I realized it is actually very difficult to find an easy-to-use tool on the Internet which can perform efficient k-NN search with satisfying accuracy in high dimensional space. High dimensionality in this context refers to those datasets having **hundreds of features**, which is already far beyond the capability of standard [k-d tree](http://en.wikipedia.org/wiki/K-d_tree). So our design philosophy is simple.
 
-panns is developed by [Liang Wang](http://cs.helsinki.fi/liang.wang) @ Helsinki University. If you have any questions, you can either contact me via email `liang.wang[at]helsinki.fi` or post in [panns-group](https://groups.google.com/forum/#!forum/panns).
+panns is developed by [Liang Wang](http://cs.helsinki.fi/liang.wang) @ Cambridge University, UK. If you have any questions, you can either contact me via email `liang.wang[at]helsinki.fi` or post in [panns-group](https://groups.google.com/forum/#!forum/panns).
 
 
 ## Features
