@@ -55,7 +55,7 @@ sudo pip install panns --upgrade
 ```
 
 
-If you are interested in the source code or even want to contribute to make it faster and better, you can clone the code from Github.
+If you are interested in the source code or even want to contribute to make it faster and better, which I would highly appreciate, you can clone the code from Github.
 ```bash
 git clone git@github.com:ryanrhymes/panns.git
 ```
