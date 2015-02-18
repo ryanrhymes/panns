@@ -157,11 +157,11 @@ def build_parallel(mtx, shape_mtx, K, dtype, t):
     numpy.random.seed(t**2)
     tree = NaiveTree()
     children = range(len(mtx))
-    make_tree_parallel(tree.root, children, mtx, shape_mtx, dtype, K)
+    make_tree_parallel(tree.root, children, mtx, shape_mtx[1], dtype, K)
     return tree
 
 
-def make_tree_parallel(parent, children, mtx, shape_mtx, dtype, K, lvl=0):
+def make_tree_parallel(parent, children, mtx, dim, dtype, K, lvl=0):
     """
     Builds up a binary tree recursively, for parallel building.
 
@@ -177,7 +177,7 @@ def make_tree_parallel(parent, children, mtx, shape_mtx, dtype, K, lvl=0):
     l_child, r_child = None, None
     for attempt in xrange(16):
         parent.proj = numpy.random.randint(2**32-1)
-        u = gaussian_vector(shape_mtx[1], True, dtype, parent.proj)
+        u = gaussian_vector(dim, True, dtype, parent.proj)
         parent.ofst = Metric.split(u, children, mtx)
         l_child, r_child = [], []
         for i in children:
@@ -189,8 +189,8 @@ def make_tree_parallel(parent, children, mtx, shape_mtx, dtype, K, lvl=0):
                 break
     parent.lchd = Node()
     parent.rchd = Node()
-    make_tree_parallel(parent.lchd, l_child, mtx, shape_mtx, dtype, K)
-    make_tree_parallel(parent.rchd, r_child, mtx, shape_mtx, dtype, K)
+    make_tree_parallel(parent.lchd, l_child, mtx, dim, dtype, K)
+    make_tree_parallel(parent.rchd, r_child, mtx, dim, dtype, K)
     return
 
 
