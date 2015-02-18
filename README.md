@@ -112,7 +112,7 @@ v = gaussian_vector(100)
 n = p.query(v, 10)
 ```
 
-#### Parallelize indexing
+#### * Parallelize indexing
 
 Usually, building index for a high dimensional dataset can be very time-consuming. panns tries to speed up this process from two perspectives: optimizing the code and taking advantage of the physical resources. If multiple cores are available, parallel building can be easily enabled as follows:
 
