@@ -129,6 +129,9 @@ p.build()
 
 ```
 
+#### Query a panns index
+
+How to perform a query to panns index?
 
 
 ## Theory In a Nutshell
