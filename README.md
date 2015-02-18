@@ -67,7 +67,7 @@ git clone git@github.com:ryanrhymes/panns.git
 
 ## Quick Start
 
-#### Create a panns instance
+##### Create a panns instance
 
 panns assumes that the dataset is a row-based the matrix (e.g. m x n), where each row represents a data point from an n-dimension feature space. The code snippet below first constructs a 1000 by 100 data matrix, then builds an index of 50 binary trees and saves it to a file.
 
@@ -87,6 +87,8 @@ for i in xrange(1000):
 p.build(50)
 p.save('test.idx')
 ```
+
+#### Load a dataset
 
 Besides using `add_vector(v)` function, panns supports multiple ways of loading a dataset. For those extremely large datasets, [HDF5](http://www.hdfgroup.org/HDF5/) is recommended though the building performance will be significantly degraded. However, the performance can be improved by enabling parallel building as shown later.
 
