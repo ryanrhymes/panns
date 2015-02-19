@@ -97,7 +97,7 @@ Before indexing your dataset, you can load row vectors one by one into panns usi
 p.add_vector(v)
 ```
 
-Besides using `add_vector(v)` function, panns supports multiple ways of loading a dataset. For those extremely large datasets, there are two solutions. First, you can use [HDF5](http://www.hdfgroup.org/HDF5/) though the indexing performance will be significantly degraded. Second, you can convert the dataset to a numpy **mmap** matrix then use `load_matrix(A)` to load it directly, which in practice, gives much better performance than the HDF5 option.
+Besides using `add_vector(v)` function, panns supports multiple ways of loading a dataset. For those extremely large datasets, there are two solutions. First, you can use [HDF5](http://www.hdfgroup.org/HDF5/) though the indexing performance will be significantly degraded. Second, you can convert the dataset to a numpy **mmap** matrix then use `load_matrix(A)` to load it directly, which in practice, gives much better performance than the HDF5 solution.
 
 ```python
 # datasets can be loaded in the following ways
