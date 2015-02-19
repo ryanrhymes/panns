@@ -88,7 +88,7 @@ p.save('test.idx')
 
 #### Load a dataset
 
-As mentioned, panns assumes that we are working on a row-based matrix. Before indexing your dataset, you can load row vector one by one into panns using `add_vector(v)`. `v` is supposed to be a numpy row vector.
+As mentioned, panns assumes that we are working on a row-based matrix. Before indexing your dataset, you can load row vector one by one into panns using `add_vector(v)`. Variable `v` is supposed to be a numpy row vector.
 
 ```python
 # 1. load a data point from your dataset
@@ -97,7 +97,7 @@ As mentioned, panns assumes that we are working on a row-based matrix. Before in
 p.add_vector(v)
 ```
 
-Besides using `add_vector(v)` function, panns supports multiple ways of loading a dataset. For those extremely large datasets, [HDF5](http://www.hdfgroup.org/HDF5/) is recommended though the building performance will be significantly degraded. However, the performance can be improved by enabling parallel building as shown later.
+Besides using `add_vector(v)` function, panns supports multiple ways of loading a dataset. For those extremely large datasets, there are two solutions. First, [HDF5](http://www.hdfgroup.org/HDF5/) is recommended though the building performance will be significantly degraded. However, the performance can be improved by enabling parallel building as shown later. Second, you can convert the dataset to numpy mmap matrix then use `load_matrix(A)` to load it directly, which in practice gives even much better performance than the first option.
 
 ```python
 # datasets can be loaded in the following ways
