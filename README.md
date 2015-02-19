@@ -106,7 +106,24 @@ p.load_csv(fname, sep=',')           # load a csv file with specified separator
 p.load_hdf5(fname, dataset='panns')  # load a HDF5 file with specified dataset
 ```
 
-#### Index a dataset
+#### Index a dataset (in parallel)
+
+After your dataset is loaded by panns, you can start indexing it by calling `p.build(c)`. Variable `c` specifies the number of trees you want in an index, higher number indicates better accuracy but larger index size. By default, `c = 64` if you do not specify the value explicitly.
+
+```python
+# enable the parallel building mode
+p.parallelize(True)
+
+# build an index of 128 trees and save to a file
+p.build(125)
+p.save('test.idx')
+```
+
+Usually, building index for a high dimensional dataset can be very time-consuming. panns tries to speed up this process with parallelization. If multiple cores are available, parallel building can be easily enabled with `p.parallelize(True)`. Similarly, you can also disable it by calling `p.parallelize(False)`. By default, parallel mode is **not** enabled.
+
+`p.save('test.idx')` creates two files on your hard disk. One is `test.idx` which stores all the index trees; the other is `test.idx.npy` which is a numpy matrix containing all the raw data vectors of your dataset.
+
+### Load a created index
 
 The saved index can be loaded and shared among different processes for future use. Therefore, the query performance can be further improved by parallelism. The following code loads the previously generated index file, then performs a simple query. The query returns 10 approximate nearest neighbors.
 
@@ -119,23 +136,6 @@ p.load('test.idx')
 
 v = gaussian_vector(100)
 n = p.query(v, 10)
-```
-
-#### Parallelize indexing
-
-Usually, building index for a high dimensional dataset can be very time-consuming. panns tries to speed up this process from two perspectives: optimizing the code and taking advantage of the physical resources. If multiple cores are available, parallel building can be easily enabled as follows:
-
-```python
-
-from panns import *
-
-p = PannsIndex(metric='angular')
-
-....
-
-p.parallelize(True)
-p.build()
-
 ```
 
 #### Query a panns index
