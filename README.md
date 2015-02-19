@@ -92,7 +92,7 @@ Before indexing your dataset, you can load row vectors one by one into panns usi
 
 ```python
 # 1. load a data point from your dataset
-# 2. convert the point to numpy vector if necessary
+# 2. convert the point to a numpy vector if necessary
 # 3. add the vector to panns index
 p.add_vector(v)
 ```
