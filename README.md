@@ -193,12 +193,14 @@ One thing worth pointing out is the evaluation here is far from thorough and com
 
 ## Discussion
 
-Several toolkits are available for doing the similar job. For example, [spotify/annoy](https://github.com/spotify/annoy), [Flann](http://www.cs.ubc.ca/research/flann/) and [scikit-learn](http://scikit-learn.org/stable/). In terms of balancing the query speed and accuracy, Annoy does an excellent job and performs the best in our test. PANNS, on the other hand, is not really comparable to aforementioned tools regarding the query speed. Though rewriting the code in `C` might help, we will lose the the focus and the code will become less accessible for our students. (Python is still popular option in universities.)
+Several toolkits are available for doing the similar job. For example, [spotify/annoy](https://github.com/spotify/annoy), [Flann](http://www.cs.ubc.ca/research/flann/) and [scikit-learn](http://scikit-learn.org/stable/). In terms of balancing the query speed and accuracy, Annoy does an excellent job and performs the best in our test. PANNS, on the other hand, is not really comparable to aforementioned tools regarding the query speed. Though rewriting the code in `C` might help, we will lose the focus and the code will become less accessible for our students. (Python is still popular option in universities.)
 
-However, PANNS scales quite will on the big datasets, and generates smaller indices for extremelly high dimensional datasets. I recommend the following good articles on measureming and comparing different tools, so that you know the pros and cons of each tool:
+panns scales quite will on the big datasets (with parallel building), and generates smaller indices for extremelly high dimensional datasets. I recommend the following good articles on measureming and comparing different tools, so that you know the pros and cons of each tool:
 
 * [Performance Shootout of Nearest Neighbours](http://radimrehurek.com/2013/11/performance-shootout-of-nearest-neighbours-intro/) by Radim Řehůřek.
 * [Annoying blog post](http://erikbern.com/?p=783) by Erik Bernhardsson.
+
+Last comment, I actually would love to see someone who can port the algorithmic logic of panns into annoy which already does an excellent job in k-NN search. Especially, the newest version of panns completely avoids storing the random vectors in indices. I do hope annoy can become the de-facto tool in this small field. Meanwhile, panns will stay simple and serve as elegant starting point for the learners.
 
 Any suggestions, questions and related discussions are warmly welcome. You can post and find relevant information in [panns-group](https://groups.google.com/forum/#!forum/panns) .
 
