@@ -161,6 +161,7 @@ Evaluation in this section is simply done by comparing against Annoy. Annoy is a
 |:----------:|:-----------------:|:-----------------:|:--------------:|:--------------:|
 |  Accuracy  |       69.2%       |       48.8%       |      70.1%     |      50.4%     |
 | Index Size |       5.4 MB      |       20 MB       |     5.4 MB     |      11 MB     |
+|  Raw Data  |       ??? MB      |       ?? MB       |     ??? MB     |      ?? MB     |
 
 
 Compared with Annoy, panns can achieve higher accuracy with much smaller index file. The reason was actually already briefly discussed in "Theory" section. Generally speaking, the higher accuracy is achieved by placing the offset at sample average; while the smaller index is achieved by reusing the projection vectors.
