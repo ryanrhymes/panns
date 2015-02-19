@@ -121,7 +121,17 @@ p.save('test.idx')
 
 Usually, building index for a high dimensional dataset can be very time-consuming. panns tries to speed up this process with parallelization. If multiple cores are available, parallel building can be easily enabled with `p.parallelize(True)`. Similarly, you can also disable it by calling `p.parallelize(False)`. By default, parallel mode is **not** enabled.
 
-`p.save('test.idx')` creates two files on your hard disk. One is `test.idx` which stores all the index trees; the other is `test.idx.npy` which is a numpy matrix containing all the raw data vectors of your dataset.
+`p.save('test.idx')` creates two files on your hard disk. One is `test.idx` which stores all the index trees; the other is `test.idx.npy` which is a numpy matrix containing all the raw data vectors of your dataset. For `.npy` file, you can also decide whether to save it as an in-memory file or mmap file.
+
+```python
+# save the index as an in-memory file if the raw dataset is small or medium size
+# later panns will load the entire .npy file in to the physical memory
+p.save('test.idx', mmap=False)
+
+# save the index as mmap file if the raw dataset is huge
+# usually, your OS will handle the dynamic loading
+p.save('test.idx', mmap=True)
+```
 
 #### Load a panns index
 
