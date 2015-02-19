@@ -193,7 +193,7 @@ One thing worth pointing out is the evaluation here is far from thorough and com
 
 ## Discussion
 
-Several toolkits are available for doing the similar job. For example, [Spotify/Annoy](https://github.com/spotify/annoy), [Flann](http://www.cs.ubc.ca/research/flann/) and [scikit-learn](http://scikit-learn.org/stable/). In terms of balancing the query speed and accuracy, Annoy does an excellent job and performs the best in our test. PANNS, on the other hand, is not really comparable to aforementioned tools regarding the query speed. Though rewriting the code in `C` might help, we will lose the the focus and the code will become less accessible for our students. (Python is still popular option in universities.)
+Several toolkits are available for doing the similar job. For example, [spotify/annoy](https://github.com/spotify/annoy), [Flann](http://www.cs.ubc.ca/research/flann/) and [scikit-learn](http://scikit-learn.org/stable/). In terms of balancing the query speed and accuracy, Annoy does an excellent job and performs the best in our test. PANNS, on the other hand, is not really comparable to aforementioned tools regarding the query speed. Though rewriting the code in `C` might help, we will lose the the focus and the code will become less accessible for our students. (Python is still popular option in universities.)
 
 However, PANNS scales quite will on the big datasets, and generates smaller indices for extremelly high dimensional datasets. I recommend the following good articles on measureming and comparing different tools, so that you know the pros and cons of each tool:
 
