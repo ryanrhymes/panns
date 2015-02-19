@@ -4,7 +4,7 @@ panns -- Nearest Neighbors Search
 
 ![Downloads](https://pypip.in/d/panns/badge.png "Downloads") . ![License](https://pypip.in/license/gensim/badge.png "License")
 
-If you do not have patience to read, you can either directly jump to the "Quick Start" section below for example code, or go to the [How-To](https://github.com/ryanrhymes/panns/wiki/How-To) page in panns wiki.
+If you do not have patience to read, you can either jump directly to the "Quick Start" section below for example code, or go to the [How-To](https://github.com/ryanrhymes/panns/wiki/How-To) page in panns wiki.
 
 
 
@@ -87,6 +87,12 @@ p.save('test.idx')
 ```
 
 #### Load a dataset
+
+As mentioned, panns assumes that we are working on a row-based matrix. Before indexing your dataset, you can load row vector one by one into panns using `add_vector(v)`.
+
+```python
+p.add_vector(v)                     # v is
+```
 
 Besides using `add_vector(v)` function, panns supports multiple ways of loading a dataset. For those extremely large datasets, [HDF5](http://www.hdfgroup.org/HDF5/) is recommended though the building performance will be significantly degraded. However, the performance can be improved by enabling parallel building as shown later.
 
