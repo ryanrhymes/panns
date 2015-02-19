@@ -115,7 +115,7 @@ After your dataset is loaded by panns, you can start indexing it by calling `p.b
 p.parallelize(True)
 
 # build an index of 128 trees and save to a file
-p.build(125)
+p.build(128)
 p.save('test.idx')
 ```
 
@@ -123,9 +123,22 @@ Usually, building index for a high dimensional dataset can be very time-consumin
 
 `p.save('test.idx')` creates two files on your hard disk. One is `test.idx` which stores all the index trees; the other is `test.idx.npy` which is a numpy matrix containing all the raw data vectors of your dataset.
 
-### Load a created index
+#### Load a panns index
 
-The saved index can be loaded and shared among different processes for future use. Therefore, the query performance can be further improved by parallelism. The following code loads the previously generated index file, then performs a simple query. The query returns 10 approximate nearest neighbors.
+Previously generated index file can be loaded by calling `p.load('test.idx')`. Note that panns will automatically look or the file with the name `test.idx.npy` in the same folder of `test.idx`. So, please always put two genereated files together.
+
+```python
+
+from panns import *
+
+p = PannsIndex(metric='euclidean')
+p.load('test.idx')
+
+```
+
+#### Query a panns index
+
+The loaded index can be hared among different processes. Therefore, the query performance can be further improved by parallelism. The following code loads the previously generated index file, then performs a simple query. The query returns 10 approximate nearest neighbors.
 
 ```python
 
@@ -137,10 +150,6 @@ p.load('test.idx')
 v = gaussian_vector(100)
 n = p.query(v, 10)
 ```
-
-#### Query a panns index
-
-How to perform a query to panns index?
 
 
 ## Theory In a Nutshell
