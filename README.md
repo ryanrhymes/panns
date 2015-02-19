@@ -148,7 +148,7 @@ p.load('test.idx')
 
 #### Query a panns index
 
-The loaded index can be hared among different processes. Therefore, the query performance can be further improved by parallelism. The following code loads the previously generated index file, then performs a simple query. The query returns 10 approximate nearest neighbors.
+The loaded index can be shared among different processes. Therefore, the query performance can be further improved by parallelism. The following code loads the previously generated index file, then performs a simple query. The query returns 10 approximate nearest neighbors.
 
 ```python
 
