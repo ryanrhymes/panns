@@ -117,7 +117,7 @@ class PannsIndex():
         pass
 
 
-    def build(self, c=50):
+    def build(self, c=64):
         """
         Build the index for a given data set using random projections.
         The index is a forest of binary trees
