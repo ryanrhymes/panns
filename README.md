@@ -88,10 +88,13 @@ p.save('test.idx')
 
 #### Load a dataset
 
-As mentioned, panns assumes that we are working on a row-based matrix. Before indexing your dataset, you can load row vector one by one into panns using `add_vector(v)`.
+As mentioned, panns assumes that we are working on a row-based matrix. Before indexing your dataset, you can load row vector one by one into panns using `add_vector(v)`. `v` is supposed to be a numpy row vector.
 
 ```python
-p.add_vector(v)                     # v is
+# 1. load a data point from your dataset
+# 2. convert the point to numpy vector if necessary
+# 3. add the vector to panns index
+p.add_vector(v)
 ```
 
 Besides using `add_vector(v)` function, panns supports multiple ways of loading a dataset. For those extremely large datasets, [HDF5](http://www.hdfgroup.org/HDF5/) is recommended though the building performance will be significantly degraded. However, the performance can be improved by enabling parallel building as shown later.
@@ -161,7 +164,6 @@ Evaluation in this section is simply done by comparing against Annoy. Annoy is a
 |:----------:|:-----------------:|:-----------------:|:--------------:|:--------------:|
 |  Accuracy  |       69.2%       |       48.8%       |      70.1%     |      50.4%     |
 | Index Size |       5.4 MB      |       20 MB       |     5.4 MB     |      11 MB     |
-|  Raw Data  |       ??? MB      |       ?? MB       |     ??? MB     |      ?? MB     |
 
 
 Compared with Annoy, panns can achieve higher accuracy with much smaller index file. The reason was actually already briefly discussed in "Theory" section. Generally speaking, the higher accuracy is achieved by placing the offset at sample average; while the smaller index is achieved by reusing the projection vectors.
