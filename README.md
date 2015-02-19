@@ -88,7 +88,7 @@ p.save('test.idx')
 
 #### Load a dataset
 
-As mentioned, panns assumes that we are working on a row-based matrix. Before indexing your dataset, you can load row vector one by one into panns using `add_vector(v)`. Variable `v` is supposed to be a numpy row vector.
+Before indexing your dataset, you can load row vectors one by one into panns using `add_vector(v)`. Variable `v` is supposed to be a numpy row vector.
 
 ```python
 # 1. load a data point from your dataset
