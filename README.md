@@ -2,8 +2,6 @@ Panns -- Nearest Neighbors Search
 ================================
 
 
-![Downloads](https://pypip.in/d/panns/badge.png "Downloads") . ![License](https://pypip.in/license/gensim/badge.png "License")
-
 If you do not have patience to read, you can either jump directly to the "Quick Start" section below for example code, or go to the [How-To](https://github.com/ryanrhymes/panns/wiki/How-To) page in panns wiki.
 
 **Note**: the new version of panns stopped storing the actual random vectors in the index in order to achieve even smaller file size. This also means it will not work on the old panns index file. If you still want to use the old version, check 0.1.8 tag or vector branch. I apologize for this inconvenience, but things are always evolving :)
