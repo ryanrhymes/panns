@@ -16,10 +16,12 @@ from panns import *
 import numpy
 from scipy import linalg
 
+# experiment settings
+rows, cols = 1000, 1000
+numt = 1024
+
 
 def test_index_file():
-    rows, cols = 10000, 1000
-    numt = 16
     print 'Build a %i x %i dataset using %i trees ...' % (rows, cols, numt)
     vecs = numpy.random.normal(0,1,(rows,cols))
 
@@ -40,7 +42,8 @@ def test_query_without_original_space():
     pidx = PannsIndex('euclidean')
     pidx.load('mytest.idx')
 
-    #r = pidx.query(v, 10)
+    v = gaussian_vector(cols, True)
+    r = pidx.query(v, 10)
     pass
 
 

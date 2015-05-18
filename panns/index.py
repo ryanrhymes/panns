@@ -204,6 +204,24 @@ class PannsIndex():
         return r[:c]
 
 
+    def query_without_original_space(self, v, c):
+        """
+        Find the approximate nearest neighbors of a given vector
+        without using the original data space but projected space.
+
+        Parameters:
+        v: the given vector.
+        c: number of nearest neighbors.
+        """
+        r = set()
+        for tree in self.btr:
+            idxs = self.get_ann(tree.root, v, c)
+            for idx in idxs:
+                r.add( idx )
+            print len(r)
+        return None
+
+
     def get_ann(self, p, v, c):
         """
         The function which finds the nearest neighbors recursively.
@@ -333,6 +351,8 @@ class PannsIndex():
                 self.mtx = numpy.memmap(fname+'.npy', dtype=self.typ, mode='r', shape=d['mtx_shape'])
                 logger.info('loading raw dataset as mmap file ...')
             except:
+                self.mtx = None
+                self.query = self.query_without_original_space
                 logger.info('oops, missing raw data set, using probabilistic mode ...')
         pass
 
