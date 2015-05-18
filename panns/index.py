@@ -329,8 +329,11 @@ class PannsIndex():
             self.mtx = numpy.load(fname+'.npy')
             logger.info('loading raw dataset as in-mem file ...')
         except Exception, err:
-            self.mtx = numpy.memmap(fname+'.npy', dtype=self.typ, mode='r', shape=d['mtx_shape'])
-            logger.info('loading raw dataset as mmap file ...')
+            try:
+                self.mtx = numpy.memmap(fname+'.npy', dtype=self.typ, mode='r', shape=d['mtx_shape'])
+                logger.info('loading raw dataset as mmap file ...')
+            except:
+                logger.info('oops, missing raw data set, using probabilistic mode ...')
         pass
 
 
