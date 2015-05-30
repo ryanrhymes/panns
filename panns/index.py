@@ -197,7 +197,7 @@ class PannsIndex():
         r = set()
         for tree in self.btr:
             idxs = self.get_ann(tree.root, v, c)
-            for idx in idxs:
+            for idx, _ in idxs:
                 r.add( (idx, self.metric.distance(self.mtx[idx], v)) )
         r = list(r)
         r.sort(key = lambda x: x[1])
@@ -213,13 +213,16 @@ class PannsIndex():
         v: the given vector.
         c: number of nearest neighbors.
         """
-        r = set()
+        r = dict()
         for tree in self.btr:
             idxs = self.get_ann(tree.root, v, c)
-            for idx in idxs:
-                r.add( idx )
-            print len(r)
-        return None
+            for idx, proj in idxs:
+                t = numpy.dot(self.random_direction(proj), self.mtx[idx])
+                s = numpy.dot(self.random_direction(proj), v)                
+                r[idx] = abs(t - s)
+
+        r = sorted([ (v,k) for k,v in r.items() ])
+        return r #r[:20*c]
 
 
     def get_ann(self, p, v, c):
@@ -234,7 +237,7 @@ class PannsIndex():
         nns = None
 
         if hasattr(p, 'nlst'):
-            return p.nlst
+            return [ (x,p.proj) for x in p.nlst ]
         t = numpy.dot(self.random_direction(p.proj), v) - p.ofst
         if t > 0:
             nns = self.get_ann(p.rchd, v, c)

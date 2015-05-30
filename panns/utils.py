@@ -187,8 +187,8 @@ def make_tree_parallel(parent, children, mtx, dim, dtype, K, lvl=0):
                 l_child.append(i)
         if len(l_child) > 0 and len(r_child) > 0:
                 break
-    parent.lchd = Node()
-    parent.rchd = Node()
+    parent.lchd = Node(); parent.lchd.proj = parent.proj;
+    parent.rchd = Node(); parent.rchd.proj = parent.proj;
     make_tree_parallel(parent.lchd, l_child, mtx, dim, dtype, K)
     make_tree_parallel(parent.rchd, r_child, mtx, dim, dtype, K)
     return
