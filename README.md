@@ -69,7 +69,7 @@ git clone git@github.com:ryanrhymes/panns.git
 
 ## Quick Start
 
-panns assumes that the dataset is a row-based matrix (e.g. m x n), where each row represents a data point from a n-dimension feature space. The code snippet below first constructs a 1000 by 100 data matrix, then builds an index of 50 binary trees and saves it to a file. Note that you need to explicitly specify the dimensionality in `PannsIndex(...)` before calling `build(...)`, since panns does not try to check your data to figure out what dimiensionality it is.
+panns assumes that the dataset is a row-based matrix (e.g. m x n), where each row represents a data point from a n-dimension feature space. The code snippet below first constructs a 1000 by 100 data matrix, then builds an index of 50 binary trees and saves it to a file. Note that you need to explicitly specify the dimensionality in `PannsIndex(...)` before calling `build(...)`, since panns will not try to check your dataset to figure out for you what dimiensionality it actually is.
 
 ```python
 
