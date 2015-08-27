@@ -1,34 +1,25 @@
 <!DOCTYPE html>
-<html>
+<html lang="en-us">
   <head>
-    <meta charset='utf-8'>
-    <meta http-equiv="X-UA-Compatible" content="chrome=1">
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <link href='https://fonts.googleapis.com/css?family=Architects+Daughter' rel='stylesheet' type='text/css'>
+    <meta charset="UTF-8">
+    <title>Panns by ryanrhymes</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="stylesheets/normalize.css" media="screen">
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen">
     <link rel="stylesheet" type="text/css" href="stylesheets/github-light.css" media="screen">
-    <link rel="stylesheet" type="text/css" href="stylesheets/print.css" media="print">
-
-    <!--[if lt IE 9]>
-    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
-    <![endif]-->
-
-    <title>Panns by ryanrhymes</title>
   </head>
-
   <body>
-    <header>
-      <div class="inner">
-        <h1>Panns</h1>
-        <h2>Python Approximate Nearest Neighbor Search in very high dimensional space with optimized indexing.</h2>
-        <a href="https://github.com/ryanrhymes/panns" class="button"><small>View project on</small> GitHub</a>
-      </div>
-    </header>
+    <section class="page-header">
+      <h1 class="project-name">Panns</h1>
+      <h2 class="project-tagline">Python Approximate Nearest Neighbor Search in very high dimensional space with optimized indexing.</h2>
+      <a href="https://github.com/ryanrhymes/panns" class="btn">View on GitHub</a>
+      <a href="https://github.com/ryanrhymes/panns/zipball/master" class="btn">Download .zip</a>
+      <a href="https://github.com/ryanrhymes/panns/tarball/master" class="btn">Download .tar.gz</a>
+    </section>
 
-    <div id="content-wrapper">
-      <div class="inner clearfix">
-        <section id="main-content">
-          <h1>
+    <section class="main-content">
+      <h1>
 <a id="panns----nearest-neighbors-search" class="anchor" href="#panns----nearest-neighbors-search" aria-hidden="true"><span class="octicon octicon-link"></span></a>Panns -- Nearest Neighbors Search</h1>
 
 <p><a href="https://gitter.im/ryanrhymes/panns?utm_source=badge&amp;utm_medium=badge&amp;utm_campaign=pr-badge&amp;utm_content=badge"><img src="https://badges.gitter.im/Join%20Chat.svg" alt="Join the chat at https://gitter.im/ryanrhymes/panns"></a></p>
@@ -51,11 +42,11 @@ p1 <span class="pl-k">=</span> PannsIndex(dimension, <span class="pl-smi">metric
 p2 <span class="pl-k">=</span> PannsIndex(dimension, <span class="pl-smi">metric</span><span class="pl-k">=</span><span class="pl-s"><span class="pl-pds">'</span>euclidean<span class="pl-pds">'</span></span>)  <span class="pl-c"># index using Euclidean distance metric</span>
 ...</pre></div>
 
-<p>Technically speaking, panns is only a small function module in one of our ongoing projects - <a href="https://www.cs.helsinki.fi/liang.wang/kvasir"><strong>Kvasir Project</strong></a>. Kvasir project aims at exploring innovative ways of seamlessly integrating intelligent content provision and recommendation into the web browsing. Kvasir is turning into a more and more interesting project, and I am planning to release an official version by the end of this year. For the details of Kvasir project, please visit our <a href="https://www.cs.helsinki.fi/liang.wang/kvasir">project website</a>.</p>
+<p>Technically speaking, panns is only a small function module in one of our ongoing projects - <a href="http://www.cl.cam.ac.uk/%7Elw525/kvasir/"><strong>Kvasir Project</strong></a>. Kvasir project aims at exploring innovative ways of seamlessly integrating intelligent content provision and recommendation into the web browsing. Kvasir is turning into a more and more interesting project, and I am planning to release an official version by the end of this year. For the details of Kvasir project, please visit our <a href="http://www.cl.cam.ac.uk/%7Elw525/kvasir/">project website</a>.</p>
 
 <p>The reason that I decided to release panns as a standalone package is simple. During the development of Kvasir, I realized it was actually very difficult to find an scalable tool on the Internet which can perform efficient k-NN search with satisfying accuracy in high dimensional spaces. High dimensionality in this context refers to those datasets having <strong>hundreds of features</strong>, which is already far beyond the capability of standard <a href="http://en.wikipedia.org/wiki/K-d_tree">k-d tree</a>. For the design philosophy, I do not intend to re-invent another super machine learning toolkit which includes everything. Instead, panns has a very clear focus and only tries to do one task well, namely the k-NN search with satisfying accuracy, performance and as small index as possible. It is also worth mentioning that there are many ways to do k-NN in practice. The choice on random projection is based on my consideration on both the ease of understanding (from teaching perspective) and the efficiency of the algorithm (from practical deployment perspective).</p>
 
-<p>panns is developed by Dr. <a href="http://cs.helsinki.fi/liang.wang">Liang Wang</a> @ Cambridge University, UK. If you have any questions, you can either contact me via email <code>liang.wang[at]helsinki.fi</code> or post in <a href="https://groups.google.com/forum/#!forum/panns">panns-group</a>.</p>
+<p>panns is developed by Dr. <a href="http://www.cl.cam.ac.uk/%7Elw525/">Liang Wang</a> @ Cambridge University, UK. If you have any questions, you can either contact me via email <code>liang.wang[at]cl.cam.ac.uk</code> or post in <a href="https://groups.google.com/forum/#!forum/panns">panns-group</a>.</p>
 
 <h2>
 <a id="features" class="anchor" href="#features" aria-hidden="true"><span class="octicon octicon-link"></span></a>Features</h2>
@@ -253,24 +244,14 @@ n <span class="pl-k">=</span> p.query(v, <span class="pl-c1">10</span>)</pre></d
 <li>Improve query performance by parallelism.</li>
 <li>Perform more thorough evaluations.</li>
 </ul>
-        </section>
 
-        <aside id="sidebar">
-          <a href="https://github.com/ryanrhymes/panns/zipball/master" class="button">
-            <small>Download</small>
-            .zip file
-          </a>
-          <a href="https://github.com/ryanrhymes/panns/tarball/master" class="button">
-            <small>Download</small>
-            .tar.gz file
-          </a>
+      <footer class="site-footer">
+        <span class="site-footer-owner"><a href="https://github.com/ryanrhymes/panns">Panns</a> is maintained by <a href="https://github.com/ryanrhymes">ryanrhymes</a>.</span>
 
-          <p class="repo-owner"><a href="https://github.com/ryanrhymes/panns"></a> is maintained by <a href="https://github.com/ryanrhymes">ryanrhymes</a>.</p>
+        <span class="site-footer-credits">This page was generated by <a href="https://pages.github.com">GitHub Pages</a> using the <a href="https://github.com/jasonlong/cayman-theme">Cayman theme</a> by <a href="https://twitter.com/jasonlong">Jason Long</a>.</span>
+      </footer>
 
-          <p>This page was generated by <a href="https://pages.github.com">GitHub Pages</a> using the Architect theme by <a href="https://twitter.com/jasonlong">Jason Long</a>.</p>
-        </aside>
-      </div>
-    </div>
+    </section>
 
             <script type="text/javascript">
             var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
