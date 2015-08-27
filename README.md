@@ -16,8 +16,8 @@ panns stands for "Python Approximate Nearest Neighbor Search", which is an optim
 
 from panns import *
 
-p1 = PannsIndex(metric='angular')    # index using cosine distance metric
-p2 = PannsIndex(metric='euclidean')  # index using Euclidean distance metric
+p1 = PannsIndex(dimension, metric='angular')    # index using cosine distance metric
+p2 = PannsIndex(dimension, metric='euclidean')  # index using Euclidean distance metric
 ...
 ```
 
