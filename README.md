@@ -69,7 +69,7 @@ git clone git@github.com:ryanrhymes/panns.git
 
 ## Quick Start
 
-panns assumes that the dataset is a row-based matrix (e.g. m x n), where each row represents a data point from a n-dimension feature space. The code snippet below first constructs a 1000 by 100 data matrix, then builds an index of 50 binary trees and saves it to a file.
+panns assumes that the dataset is a row-based matrix (e.g. m x n), where each row represents a data point from a n-dimension feature space. The code snippet below first constructs a 1000 by 100 data matrix, then builds an index of 50 binary trees and saves it to a file. Note that you need to explicitly specify the dimensionality in `PannsIndex(...)` before calling `build(...)`, since panns does not try to check your data to figure out what dimiensionality it is.
 
 ```python
 
@@ -137,7 +137,7 @@ p.save('test.idx', mmap=True)
 
 #### Load a panns index
 
-Previously generated index file can be loaded by calling `p.load('test.idx')`. Note that panns will automatically look or the file with the name `test.idx.npy` in the same folder of `test.idx`. So, please always put two genereated files together.
+Previously generated index file can be loaded by calling `p.load('test.idx')`. Note that panns will automatically look or the file with the name `test.idx.npy` in the same folder of `test.idx`. So, please always put two genereated files together. For loading an index, you do not need to specify the dimensionality of the dataset in `PannsIndex(...)` since such information has been stored in the index file.
 
 ```python
 
