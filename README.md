@@ -1,6 +1,8 @@
 Panns -- Nearest Neighbors Search
 ================================
 
+[![Join the chat at https://gitter.im/ryanrhymes/panns](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/ryanrhymes/panns?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+
 
 If you do not have patience to read, you can either jump directly to the "Quick Start" section below for example code, or go to the [How-To](https://github.com/ryanrhymes/panns/wiki/How-To) page in panns wiki.
 
