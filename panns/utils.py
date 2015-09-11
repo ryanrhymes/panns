@@ -154,7 +154,7 @@ def build_parallel(mtx, shape_mtx, K, dtype, t):
     """
     logger.info('pass %i ...' % t)
     mtx = numpy.memmap(mtx, dtype=dtype, mode='r', shape=shape_mtx)
-    numpy.random.seed(t**2)
+    numpy.random.seed(t**2 + numpy.random.randint(2**30))
     tree = NaiveTree()
     children = range(len(mtx))
     make_tree_parallel(tree.root, children, mtx, shape_mtx[1], dtype, K)
