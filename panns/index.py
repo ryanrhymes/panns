@@ -167,7 +167,7 @@ class PannsIndex():
             return
         l_child, r_child = None, None
         for attempt in xrange(16):
-            parent.proj = numpy.random.randint(2**32-1)
+            parent.proj = numpy.random.randint(2**32-1, dtype=numpy.uint32)
             u = self.random_direction(parent.proj)
             parent.ofst = self.metric.split(u, children, self.mtx)
             l_child, r_child = [], []
