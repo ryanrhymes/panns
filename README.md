@@ -6,7 +6,9 @@ Panns -- Nearest Neighbors Search
 
 If you do not have patience to read, you can either jump directly to the "Quick Start" section below for example code, or go to the [How-To](https://github.com/ryanrhymes/panns/wiki/How-To) page in panns wiki.
 
-**Note**: the new version of panns stopped storing the actual random vectors in the index in order to achieve even smaller file size. This also means it will not work on the old panns index file. If you still want to use the old version, check 0.1.8 tag or vector branch. I apologize for this inconvenience, but things are always evolving :)
+**Note 1**: the new version of panns stopped storing the actual random vectors in the index in order to achieve even smaller file size. This also means it will not work on the old panns index file. If you still want to use the old version, check 0.1.8 tag or vector branch. I apologize for this inconvenience, but things are always evolving :)
+
+**Note 2**: panns is implemented in Python only includes very basic features (of our actual research algorithm -- MRPT), it is mostly for teaching purpose instead of for industrial use due to the performance penalty of Python. For a thorough comparison between MRPT and other approximate k-nn algorithms, please refer to [Elias Jääsaari](https://www.cs.helsinki.fi/en/people/ejaasaar)'s excellent [evaluation work](https://github.com/ejaasaari/mrpt-comparison).
 
 **Follow me on ==> [Twitter](https://twitter.com/ryan_liang),  [Weibo](http://www.weibo.com/olutta),  [Google+](https://www.google.com/+RyanLiang),  [Facebook](http://www.facebook.com/ryan.liang.wang),  [Blogger](http://ryanrhymes.blogspot.com/),  [LinkedIn](http://uk.linkedin.com/in/liangsuomi/)**
 
@@ -69,7 +71,7 @@ git clone git@github.com:ryanrhymes/panns.git
 
 ## Quick Start
 
-panns assumes that the dataset is a row-based matrix (e.g. m x n), where each row represents a data point from a n-dimension feature space. The code snippet below first constructs a 1000 by 100 data matrix, then builds an index of 50 binary trees and saves it to a file. 
+panns assumes that the dataset is a row-based matrix (e.g. m x n), where each row represents a data point from a n-dimension feature space. The code snippet below first constructs a 1000 by 100 data matrix, then builds an index of 50 binary trees and saves it to a file.
 
 Note that you need to explicitly specify the dimensionality in `PannsIndex(...)` before calling `build(...)`, since panns will not try to check your dataset to figure out for you what dimiensionality it actually is.
 
