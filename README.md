@@ -6,9 +6,11 @@ Panns -- Nearest Neighbors Search
 
 If you do not have patience to read, you can either jump directly to the "Quick Start" section below for example code, or go to the [How-To](https://github.com/ryanrhymes/panns/wiki/How-To) page in panns wiki.
 
-**Note 1**: panns only includes very basic features (of our actual research algorithm -- [MRPT](http://arxiv.org/abs/1509.06957)), it is mostly for teaching purpose instead of for industrial use due to the performance penalty of Python. For those who are after performance and industrial use, please refer to the following C++ implementation.
+**Note 1**: panns only includes very basic features (of our actual research algorithm -- [MRPT](http://arxiv.org/abs/1509.06957)), it is mostly for teaching purpose instead of for industrial use due to the performance penalty of Python.
 
-[MRPT](https://github.com/teemupitkanen/mrpt) implemented by Teemu Pitkänen, Ville Hyvönen, and Elias Jääsaari.
+**Note 2**: For industrial use, please refer to the following C++ implementation. The bindings to other languages and more features (such automatic parameter tuning) will come soon.
+
+[MRPT (C++)](https://github.com/teemupitkanen/mrpt) implemented by [Teemu Pitkänen](https://www.cs.helsinki.fi/en/people/teempitk), [Ville Hyvönen](https://www.cs.helsinki.fi/en/people/hyvi), and [Elias Jääsaari](https://www.cs.helsinki.fi/en/people/ejaasaar).
 
 MRPT is the fastest k-nn algorithms and possesses the most stable and consistent performance across various data sets. For a thorough comparison between MRPT and other approximate k-nn algorithms, please refer to [Elias Jääsaari](https://www.cs.helsinki.fi/en/people/ejaasaar)'s excellent [evaluation work](https://github.com/ejaasaari/mrpt-comparison), and his cool [interactive plot](https://github.com/ejaasaari/mrpt-comparison/blob/master/results/interactive.md).
 
