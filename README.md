@@ -3,12 +3,14 @@ Panns -- Nearest Neighbors Search
 
 [![Join the chat at https://gitter.im/ryanrhymes/panns](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/ryanrhymes/panns?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
+## Notice
+
 
 If you do not have patience to read, you can either jump directly to the "Quick Start" section below for example code, or go to the [How-To](https://github.com/ryanrhymes/panns/wiki/How-To) page in panns wiki.
 
 **Note 1**: panns only includes very basic features (of our actual research algorithm -- [MRPT](http://arxiv.org/abs/1509.06957)), it is mostly for teaching purpose instead of for industrial use due to the performance penalty of Python.
 
-**Note 2**: For industrial use, please refer to the following C++ implementation. The bindings to other languages and more features (such automatic parameter tuning) will come soon.
+**Note 2**: For industrial use and better performance, please choose the following C++ implementation. The bindings to other languages and more features (such automatic parameter tuning) will come soon.
 
 [MRPT (C++)](https://github.com/teemupitkanen/mrpt) implemented by [Teemu Pitkänen](https://www.cs.helsinki.fi/en/people/teempitk), [Ville Hyvönen](https://www.cs.helsinki.fi/en/people/hyvi), and [Elias Jääsaari](https://www.cs.helsinki.fi/en/people/ejaasaar).
 
