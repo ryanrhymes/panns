@@ -7,13 +7,11 @@ If you do not have patience to read, you can either jump directly to the "Quick 
 
 ## Important Notice
 
-**Note 1**: Panns already "retired" and has been replaced by another much more advanced algorithm -- [MRPT](https://github.com/teemupitkanen/mrpt). For industrial use and better performance, please choose the following C++ implementation. The bindings to other languages and more features (such as automatic parameter tuning) will come soon.
+**Note 1**: Panns already "retired" and has been replaced by another much more advanced algorithm -- MRPT [[code](https://github.com/teemupitkanen/mrpt), [paper](http://arxiv.org/abs/1509.06957),. For industrial use and better performance, please choose the following C++ implementation. The bindings to other languages and more features (such as automatic parameter tuning) will come soon.
 
 [MRPT (C++)](https://github.com/teemupitkanen/mrpt) is implemented and maintained by [Teemu Pitkänen](https://www.cs.helsinki.fi/en/people/teempitk), [Ville Hyvönen](https://www.cs.helsinki.fi/en/people/hyvi), and [Elias Jääsaari](https://www.cs.helsinki.fi/en/people/ejaasaar).
 
 MRPT is the fastest k-nn algorithms and possesses the most stable and consistent performance across various data sets. For a thorough comparison between MRPT and other approximate k-nn algorithms, please refer to [Elias Jääsaari](https://www.cs.helsinki.fi/en/people/ejaasaar)'s excellent [evaluation work](https://github.com/ejaasaari/mrpt-comparison), and his cool [interactive plot](https://github.com/ejaasaari/mrpt-comparison/blob/master/results/interactive.md).
-
-**Note 2**: panns in this repository only includes very basic features of [MRPT](http://arxiv.org/abs/1509.06957), it is suitable for learning purpose instead of for industrial use due to the performance penalty of Python.
 
 
 **Follow me on ==> [Twitter](https://twitter.com/ryan_liang),  [Weibo](http://www.weibo.com/olutta),  [Google+](https://www.google.com/+RyanLiang),  [Facebook](http://www.facebook.com/ryan.liang.wang),  [Blogger](http://ryanrhymes.blogspot.com/),  [LinkedIn](http://uk.linkedin.com/in/liangsuomi/)**
