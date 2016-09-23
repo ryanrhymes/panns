@@ -7,7 +7,7 @@ If you do not have patience to read, you can either jump directly to the "Quick 
 
 ## Important Notice
 
-**Note 1**: Panns already "retired" and has been replaced by another much more advanced algorithm -- MRPT [[code](https://github.com/teemupitkanen/mrpt), [paper](http://arxiv.org/abs/1509.06957),. For industrial use and better performance, please choose the following C++ implementation. The bindings to other languages and more features (such as automatic parameter tuning) will come soon.
+Panns already "retired" and has been replaced by another much more advanced algorithm -- MRPT [[code](https://github.com/teemupitkanen/mrpt), [paper](http://arxiv.org/abs/1509.06957)]. For industrial use and better performance, please choose the following C++ implementation. The bindings to other languages and more features (such as automatic parameter tuning) will come soon.
 
 [MRPT (C++)](https://github.com/teemupitkanen/mrpt) is implemented and maintained by [Teemu Pitkänen](https://www.cs.helsinki.fi/en/people/teempitk), [Ville Hyvönen](https://www.cs.helsinki.fi/en/people/hyvi), and [Elias Jääsaari](https://www.cs.helsinki.fi/en/people/ejaasaar).
 
