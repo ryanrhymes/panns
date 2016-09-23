@@ -7,13 +7,13 @@ If you do not have patience to read, you can either jump directly to the "Quick 
 
 ## Important Notice
 
-**Note 1**: For industrial use and better performance, please choose the following MRPT algorithm. The bindings to other languages and more advanced features (such as automatic parameter tuning) will come soon.
+**Note 1**: Panns already "retired" and has been replaced by another much more advanced algorithm -- [MRPT](https://github.com/teemupitkanen/mrpt). For industrial use and better performance, please choose the following C++ implementation. The bindings to other languages and more features (such as automatic parameter tuning) will come soon.
 
-[MRPT (C++ implementation)](https://github.com/teemupitkanen/mrpt) is implemented and maintained by [Teemu Pitkänen](https://www.cs.helsinki.fi/en/people/teempitk), [Ville Hyvönen](https://www.cs.helsinki.fi/en/people/hyvi), and [Elias Jääsaari](https://www.cs.helsinki.fi/en/people/ejaasaar).
-
-**Note 2**: panns only includes very basic features of [MRPT](http://arxiv.org/abs/1509.06957)), it is suitable for learning purpose instead of for industrial use due to the performance penalty of Python.
+[MRPT (C++)](https://github.com/teemupitkanen/mrpt) is implemented and maintained by [Teemu Pitkänen](https://www.cs.helsinki.fi/en/people/teempitk), [Ville Hyvönen](https://www.cs.helsinki.fi/en/people/hyvi), and [Elias Jääsaari](https://www.cs.helsinki.fi/en/people/ejaasaar).
 
 MRPT is the fastest k-nn algorithms and possesses the most stable and consistent performance across various data sets. For a thorough comparison between MRPT and other approximate k-nn algorithms, please refer to [Elias Jääsaari](https://www.cs.helsinki.fi/en/people/ejaasaar)'s excellent [evaluation work](https://github.com/ejaasaari/mrpt-comparison), and his cool [interactive plot](https://github.com/ejaasaari/mrpt-comparison/blob/master/results/interactive.md).
+
+**Note 2**: panns in this repository only includes very basic features of [MRPT](http://arxiv.org/abs/1509.06957), it is suitable for learning purpose instead of for industrial use due to the performance penalty of Python.
 
 
 **Follow me on ==> [Twitter](https://twitter.com/ryan_liang),  [Weibo](http://www.weibo.com/olutta),  [Google+](https://www.google.com/+RyanLiang),  [Facebook](http://www.facebook.com/ryan.liang.wang),  [Blogger](http://ryanrhymes.blogspot.com/),  [LinkedIn](http://uk.linkedin.com/in/liangsuomi/)**
@@ -215,11 +215,3 @@ panns scales quite will on the big datasets (with parallel building), and genera
 Last comment, I actually would love to see someone who can port the algorithmic logic of panns into annoy which already does an excellent job in k-NN search. Especially, the newest version of panns completely avoids storing the random vectors in indices. I do hope annoy can become the de-facto tool in this small field. Meanwhile, panns will stay simple and serve as elegant starting point for the learners.
 
 Any suggestions, questions and related discussions are warmly welcome. You can post and find relevant information in [panns-group](https://groups.google.com/forum/#!forum/panns) .
-
-
-
-## Future Work
-
-* Implement mmap on index file to speed up index loading.
-* Improve query performance by parallelism.
-* Perform more thorough evaluations.
