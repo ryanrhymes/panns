@@ -3,16 +3,15 @@ Panns -- Nearest Neighbors Search
 
 [![Join the chat at https://gitter.im/ryanrhymes/panns](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/ryanrhymes/panns?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
-## Notice
-
-
 If you do not have patience to read, you can either jump directly to the "Quick Start" section below for example code, or go to the [How-To](https://github.com/ryanrhymes/panns/wiki/How-To) page in panns wiki.
 
-**Note 1**: panns only includes very basic features (of our actual research algorithm -- [MRPT](http://arxiv.org/abs/1509.06957)), it is mostly for teaching purpose instead of for industrial use due to the performance penalty of Python.
+## Important Notice
 
-**Note 2**: For industrial use and better performance, please choose the following C++ implementation. The bindings to other languages and more features (such automatic parameter tuning) will come soon.
+**Note 1**: For industrial use and better performance, please choose the following MRPT algorithm. The bindings to other languages and more advanced features (such as automatic parameter tuning) will come soon.
 
-[MRPT (C++)](https://github.com/teemupitkanen/mrpt) implemented by [Teemu Pitkänen](https://www.cs.helsinki.fi/en/people/teempitk), [Ville Hyvönen](https://www.cs.helsinki.fi/en/people/hyvi), and [Elias Jääsaari](https://www.cs.helsinki.fi/en/people/ejaasaar).
+[MRPT (C++ implementation)](https://github.com/teemupitkanen/mrpt) is implemented and maintained by [Teemu Pitkänen](https://www.cs.helsinki.fi/en/people/teempitk), [Ville Hyvönen](https://www.cs.helsinki.fi/en/people/hyvi), and [Elias Jääsaari](https://www.cs.helsinki.fi/en/people/ejaasaar).
+
+**Note 2**: panns only includes very basic features of [MRPT](http://arxiv.org/abs/1509.06957)), it is suitable for learning purpose instead of for industrial use due to the performance penalty of Python.
 
 MRPT is the fastest k-nn algorithms and possesses the most stable and consistent performance across various data sets. For a thorough comparison between MRPT and other approximate k-nn algorithms, please refer to [Elias Jääsaari](https://www.cs.helsinki.fi/en/people/ejaasaar)'s excellent [evaluation work](https://github.com/ejaasaari/mrpt-comparison), and his cool [interactive plot](https://github.com/ejaasaari/mrpt-comparison/blob/master/results/interactive.md).
 
