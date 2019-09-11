@@ -21,7 +21,7 @@ try:
     from scipy import linalg
     import numpy
     import h5py
-except Exception, err:
+except Exception as err:
     print 'Warning:', err
 
 from utils import *
@@ -328,7 +328,7 @@ class PannsIndex():
         try:
             self.mtx = numpy.load(fname+'.npy')
             logger.info('loading raw dataset as in-mem file ...')
-        except Exception, err:
+        except Exception as err:
             self.mtx = numpy.memmap(fname+'.npy', dtype=self.typ, mode='r', shape=d['mtx_shape'])
             logger.info('loading raw dataset as mmap file ...')
         pass
