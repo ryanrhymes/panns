@@ -21,7 +21,7 @@ try:
     from scipy import linalg
     import numpy
     import h5py
-except Exception, err:
+except Exception as err:
     print 'Warning:', err
 
 from utils import *
